@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/f7ce507d70.js" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -26,17 +27,28 @@
             /* background-color: #000; */
             line-height: 65px;
             border: 1px solid #ccc;
+            display: flex;
         }
 
-        .col a {
-            margin-left: 50px;
+        .col1 {
+            width: 50%;
+            margin-left: 20px;
+        }
+
+        .col1 a {
             color: #000;
             text-decoration: none;
         }
 
-        .col a:hover {
+        .col1 a:hover {
             color: #fc0;
         }
+
+        .col2 {
+            margin-left: 1100px;
+            width: 50%;
+        }
+
 
         .title {
             width: 100%;
@@ -310,6 +322,7 @@
 
         .pbox .b1 {
             width: 150px;
+            font-size: 12px;
             text-align: center;
             line-height: 35px;
             height: 35px;
@@ -325,7 +338,14 @@
             width: 35px;
             border: 1px solid #000;
             border-radius: 10px;
+            text-align: center;
+            line-height: 35px;
         }
+
+        /* .pbox .b2 i,
+        .pbox .b3 i{
+            margin: auto;
+        } */
 
         .sale {
             width: 100%;
@@ -492,8 +512,18 @@
 
 <body>
     <div class="col">
-        <a href="#">My account</a>
+        <div class="col1">
+            <i class="fas fa-user"></i>
+            <a href="#">My account</a>
+        </div>
+        <div class="col2">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-shopping-cart"></i>
+
+        </div>
     </div>
+
     <div class="title">
         <div class="tpic">
             <img src="313pic/asset 1.jpg" alt="">
@@ -579,18 +609,26 @@
             <p>P28 Foods Formulated...</p>
             <p>$20.00</p>
             <div class="pbox">
-                <div class="b1">CHOOSE VARIANT</div>
-                <div class="b2"></div>
-                <div class="b3"></div>
+                <div class="b1">
+                    <i class="fas fa-shopping-cart"></i>
+                    CHOOSE VARIANT</div>
+                <div class="b2">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="b3"><i class="fas fa-heart"></i></div>
             </div>
         </div>
         <div class="p2"><img src="313pic/asset 10.jpg" alt="">
             <p>P28 Foods Formulated...</p>
             <p>$29.00-$36.00</p>
             <div class="pbox">
-                <div class="b1">CHOOSE VARIANT</div>
-                <div class="b2"></div>
-                <div class="b3"></div>
+                <div class="b1">
+                    <i class="fas fa-shopping-cart"></i>
+                    CHOOSE VARIANT</div>
+                <div class="b2">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="b3"><i class="fas fa-heart"></i></div>
             </div>
         </div>
         <div class="p2">
@@ -598,9 +636,14 @@
             <p>KIND Nuts &Spices...</p>
             <p>$12.00-$30.00</p>
             <div class="pbox">
-                <div class="b1">CHOOSE VARIANT</div>
-                <div class="b2"></div>
-                <div class="b3"></div>
+                <div class="b1">
+                    <i class="fas fa-shopping-cart"></i>
+                    CHOOSE VARIANT</div>
+                <div class="b2">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="b3"><i class="fas fa-heart"></i>
+                </div>
             </div>
         </div>
         <div class="p2">
@@ -608,9 +651,13 @@
             <p>Justin's Nut Butter...</p>
             <p>$22.00</p>
             <div class="pbox">
-                <div class="b1">CHOOSE VARIANT</div>
-                <div class="b2"></div>
-                <div class="b3"></div>
+                <div class="b1">
+                    <i class="fas fa-shopping-cart"></i>
+                    CHOOSE VARIANT</div>
+                <div class="b2">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="b3"><i class="fas fa-heart"></i></div>
             </div>
         </div>
     </div>
@@ -641,9 +688,15 @@
                 <p>KIND Nuts &Spices...</p>
                 <p>$12.00-$30.00</p>
                 <div class="pbox">
-                    <div class="b1">CHOOSE VARIANT</div>
-                    <div class="b2"></div>
-                    <div class="b3"></div>
+                    <div class="b1">
+                        <i class="fas fa-shopping-cart"></i>
+                        CHOOSE VARIANT</div>
+                    <div class="b2">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="b3">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
 
             </div>
@@ -652,9 +705,15 @@
                 <p>KIND Nuts &Spices...</p>
                 <p>$12.00-$30.00</p>
                 <div class="pbox">
-                    <div class="b1">CHOOSE VARIANT</div>
-                    <div class="b2"></div>
-                    <div class="b3"></div>
+                    <div class="b1">
+                        <i class="fas fa-shopping-cart"></i>
+                        CHOOSE VARIANT</div>
+                    <div class="b2">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="b3">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
 
             </div>
@@ -663,9 +722,15 @@
                 <p>KIND Nuts &Spices...</p>
                 <p>$12.00-$30.00</p>
                 <div class="pbox">
-                    <div class="b1">CHOOSE VARIANT</div>
-                    <div class="b2"></div>
-                    <div class="b3"></div>
+                    <div class="b1">
+                        <i class="fas fa-shopping-cart"></i>
+                        CHOOSE VARIANT</div>
+                    <div class="b2">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="b3">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
 
             </div>
@@ -674,9 +739,15 @@
                 <p>KIND Nuts &Spices...</p>
                 <p>$12.00-$30.00</p>
                 <div class="pbox">
-                    <div class="b1">CHOOSE VARIANT</div>
-                    <div class="b2"></div>
-                    <div class="b3"></div>
+                    <div class="b1">
+                        <i class="fas fa-shopping-cart"></i>
+                        CHOOSE VARIANT</div>
+                    <div class="b2">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="b3">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
 
             </div>
