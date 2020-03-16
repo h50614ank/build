@@ -39,6 +39,9 @@
             color: #000;
             text-decoration: none;
         }
+        .col1:hover{
+            color: #fc0;
+        }
 
         .col1 a:hover {
             color: #fc0;
@@ -48,7 +51,12 @@
             margin-left: 1100px;
             width: 50%;
         }
-
+        .col2 i:first-child:hover{
+            color: #fc0;
+        }
+        .col2 i+i:hover{
+            color: #fc0;
+        }
 
         .title {
             width: 100%;
@@ -182,11 +190,14 @@
         }
 
         .page2 {
+            width: 100%;
             display: flex;
-            margin-left: 70px;
+            /* margin-left: 70px; */
         }
 
         .p21 {
+            margin-left: 70px;
+            width: 50%;
             position: relative;
         }
 
@@ -198,7 +209,8 @@
         }
 
         .p22 {
-            margin-left: 30px;
+            width: 50%;
+            /* margin-left: 30px; */
             position: relative;
         }
 
@@ -335,6 +347,9 @@
             border: 1px solid #000;
             border-radius: 10px;
         }
+        .pbox .b1:hover{
+            background-color: #ff0;
+        }
 
         .pbox .b2,
         .pbox .b3 {
@@ -345,6 +360,10 @@
             border-radius: 10px;
             text-align: center;
             line-height: 35px;
+        }
+        .pbox .b2:hover,
+        .pbox .b3:hover{
+            background-color: #ff0;
         }
 
         /* .pbox .b2 i,
@@ -421,6 +440,9 @@
             color: #fff;
             font-size: 20px;
         }
+        .pumpkin .txt a:hover{
+            color: #000;
+        }
 
         .pst {
             width: 100%;
@@ -481,6 +503,31 @@
             /* padding: 100px; */
             height: 400px;
             background-color: #ccc;
+            position: relative;
+        }
+        .link i{
+            position: absolute;
+            top:300px;
+            left: 50px;
+
+        }
+        .link i+i{
+            position: absolute;
+            top: 300px;
+            left: 120px;
+        }
+        .link i+i+i{
+            position: absolute;
+            top: 300px;
+            left: 190px;
+        }
+        .link i+i+i+i{
+            position: absolute;
+            top: 300px;
+            left: 260px;
+        }
+        .link i:hover{
+            color: #fff;
         }
 
         .p5txt1,
@@ -833,6 +880,12 @@
                     <input type="email" id="" name="">
                 </label>
             </p>
+        </div>
+        <div class="link">
+            <i class="fab fa-facebook-square fa-4x"></i>
+            <i class="fab fa-twitter-square fa-4x"></i>
+            <i class="fab fa-instagram-square fa-4x"></i>
+            <i class="fab fa-youtube-square fa-4x"></i>
         </div>
     </div>
     <div class="page6">©Healtly Food . Powered by Shopify</div>
