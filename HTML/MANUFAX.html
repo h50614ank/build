@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f7ce507d70.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .html {
+            width: 100%;
+
+        }
+
+        .body {
+            width: 100%;
+        }
+
+        #menu-control {
+            display: none;
+        }
+
+
+        .header-connection {
+            width: 100%;
+            background-color: #222;
+        }
+
+        .address-icon {
+            color: rgb(0, 180, 255);
+        }
+
+        .address-txt {
+            color: #fff;
+            font-size: 17px;
+        }
+
+        .phone-icon {
+            color: rgb(0, 180, 255);
+        }
+
+        .phone-txt {
+            color: #fff;
+            font-size: 17px;
+        }
+
+        .social-link a {
+            margin: 7px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .social-link a:hover {
+            color: rgb(0, 180, 255);
+        }
+
+        .header-content {
+            width: 100%;
+            position: relative;
+        }
+
+        .header-content-title {
+            width: 100%;
+            /* display: flex; */
+            height: 130px;
+            line-height: 130px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content-nav a:first-child {
+            color: rgb(0, 180, 255);
+        }
+
+        .header-content-nav a {
+            margin-right: 1.82926829268293%;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .header-content-nav a:hover {
+            color: rgb(0, 180, 255);
+        }
+
+        .header-content-icon {
+            width: 0.609756097560976%;
+            color: #fff;
+            margin-left: 14.3292682926829%;
+            font-size: 20px;
+        }
+
+        .header-content-img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            text-align: center;
+        }
+
+        .header-content-img img {
+            width: 100%;
+            height: 900PX;
+            filter: brightness(50%);
+        }
+
+        .header-content-img-txt {
+            margin-top: -550px;
+            position: relative;
+            color: #fff;
+            font-size: 50px;
+
+        }
+
+        .header-content-img-txt p {
+            padding: 30px 0 30px;
+            font-size: 28px;
+        }
+
+        .header-content-img-txt button {
+            font-size: 15px;
+            color: #fff;
+            height: 60px;
+            line-height: 60px;
+            width: 285px;
+            border-radius: 10px;
+            border: none;
+            background-color: rgb(0, 180, 255);
+        }
+
+        .header-content-img-txt button:hover {
+            background-color: #000;
+        }
+
+        .content-introduction {
+            width: 100%;
+            /* height: 500px; */
+            /* background-color: red; */
+            padding: 850px 0 70px;
+        }
+
+        .divider {
+            /* text-align: center; */
+            width: 100%;
+            height: 62px;
+            position: relative;
+            /* background-color: blue; */
+        }
+
+        .divider .divider-separator {
+            position: absolute;
+            height: 2px;
+            width: 66px;
+            background-color: rgb(0, 180, 255);
+            top: 30;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .content-introduction-title {
+            font-size: 25px;
+            text-align: center;
+            background-color: #fff;
+            padding: 50px;
+        }
+
+        .content-introduction-menu {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+
+        .menu i {
+            height: 240px;
+            margin: 0 1.82926829268293% 0 0.609756097560976%;
+            float: left;
+            font-size: 70px;
+            color: rgb(0, 180, 255);
+            ;
+        }
+
+
+
+        .menu-txt h3 {
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 25px 0;
+        }
+
+        .menu-txt p {
+            color: #888;
+            font-size: 18px;
+            font-weight: 300;
+
+        }
+
+        .main-content {
+            background-color: #eee;
+            width: 100%;
+            padding-bottom: 100px;
+        }
+
+        .content-history {
+            padding-top: 100px;
+        }
+
+        .content-history .divider {
+            width: 100%;
+            height: 62px;
+        }
+
+        .content-history span {
+            position: absolute;
+            height: 2px;
+            width: 66px;
+            background-color: rgb(0, 180, 255);
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .content-history-txt h2 {
+            padding: 5px 0;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .content-history-txt h3 {
+            padding: 50px 0 25px;
+            font-size: 20px;
+            font-weight: 300;
+            color: #444;
+        }
+
+        .content-history-txt p {
+            font-size: 18px;
+            /* font-weight: 300; */
+            color: #666;
+            padding: 0 0 70px;
+        }
+
+        .content-history-txt .read-button {
+            background-color: rgb(0, 180, 255);
+            color: #fff;
+            text-align: center;
+            width: 150px;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .content-history-txt .read-button:hover {
+            background-color: #000;
+        }
+
+
+
+        .main-menu {
+            width: 100%;
+        }
+
+        .main-menu-img {
+            margin: auto;
+            height: 358px;
+        }
+
+        .main-menu-img img {
+            height: 358px;
+            object-fit: cover;
+        }
+
+        .main-menu-img h3 {
+            color: #fff;
+            position: relative;
+            top: -180px;
+            text-align: center;
+            margin: auto;
+        }
+
+        .footer-content-title {
+            font-size: 25px;
+            text-align: center;
+            background-color: #fff;
+            padding: 50px;
+        }
+
+        .footer-content-img {
+            width: 100%;
+            /* display: flex; */
+            padding-bottom: 100px;
+        }
+
+        .footer-img {
+            width: 25.2032520325203%;
+            margin-left: 3.04878048780488%;
+        }
+
+        .footer-img img {
+            width: 100%;
+        }
+
+        .footer-img h3 {
+            padding: 30px 0;
+            color: #666;
+        }
+
+        .footer-img h3:hover {
+            color: rgb(0, 180, 255);
+        }
+
+        .txt {
+            color: #888;
+        }
+
+        .author {
+            display: inline;
+            color: rgb(0, 180, 255)
+        }
+
+        .author:hover {
+            color: #000;
+        }
+
+        .footer-img .time {
+            display: inline;
+            color: rgb(0, 180, 255);
+        }
+
+        .footer-img .time:hover {
+            color: #000;
+        }
+
+        .footer-content-button {
+            background-color: rgb(0, 180, 255);
+            color: #fff;
+            margin: auto;
+            text-align: center;
+            width: 150px;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .footer-content-button:hover {
+            background-color: #000;
+        }
+
+        .footer-col {
+            margin-top: 100px;
+            background-color: #333;
+            /* height: 550px; */
+            padding-bottom: 200px;
+        }
+
+        .footer-col-content {
+            /* display: flex; */
+            width: 80%;
+            margin: auto;
+            top: 150px;
+            position: relative;
+        }
+
+        .col1,
+        .col2,
+        .col3,
+        .col4 {
+            margin: auto;
+            /* width: 20%; */
+            color: #fff;
+        }
+
+        .col1 p {
+            color: #aaa;
+        }
+
+        .col2 h3,
+        .col3 h3,
+        .col4 h3 {
+            padding-bottom: 20px;
+        }
+
+        .col3,
+        .col4 {
+            line-height: 30px;
+        }
+
+        .col2 li,
+        .col2 li a {
+            text-decoration: none;
+            color: rgb(0, 180, 255);
+        }
+
+        .col2 li a:hover {
+            color: #fff;
+        }
+
+        .col4 .phone,
+        .col4 .num {
+            display: inline;
+        }
+
+        .col4 .num,
+        .col4 .num+p,
+        .col4 .num+p+p {
+            color: rgb(0, 180, 255);
+        }
+        .copyright{
+            background-color: #111;
+            /* display: flex; */
+        }
+        .copyright .txt{
+            /* margin: auto; */
+            margin-left: 12.1951219512195%;
+        }
+        .copyright .by{
+            color: rgb(0, 180, 255);
+        }
+        .copyright .by:hover{
+            color: #888;
+        }
+
+        @media screen and (max-width: 767px) {
+
+            nav {
+                display: none;
+            }
+
+            input:checked~nav {
+                display: block;
+            }
+
+            .menu-btn {
+                display: block;
+                width: 40px;
+                height: 40px;
+                border: 1px solid #000;
+                position: relative;
+            }
+
+            .menu-btn span {
+                position: absolute;
+                height: 4px;
+                width: 36px;
+                background-color: #666;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+
+            .menu-btn span:nth-child(1) {
+                transform: translateY(-6px);
+            }
+
+            .menu-btn span:nth-child(3) {
+                transform: translateY(6px);
+            }
+
+            nav {
+                position: absolute;
+                left: 0;
+                top: 0px;
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px 20px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+
+        @media screen and (max-width:767px) {
+            .header-connection {
+                width: 100%;
+                background-color: #222;
+                text-align: center;
+                position: relative;
+            }
+
+            .header-content-icon {
+                position: absolute;
+                top: 40px;
+                right: 10px;
+            }
+
+            .header-content-nav {
+                margin-top: -50px;
+            }
+
+            .header-content-img-txt h1 {
+                font-size: 45px;
+            }
+
+            .content-introduction-menu {
+                width: 100%;
+            }
+
+            .menu {
+                width: 100%;
+            }
+
+            .menu i {
+                height: 240px;
+                margin: 0 30px 0 0px;
+                float: left;
+                font-size: 70px;
+                color: rgb(0, 180, 255);
+                ;
+            }
+
+            .main-content {
+                background-color: #eee;
+                width: 100%;
+                /* height: 688px; */
+            }
+            .content-history{
+                margin-left: 5.21512385919166%;
+                width: 93.4810951760104%;
+            }
+
+            .content-history-img {
+                width: 100%;
+                margin: 0;
+            }
+
+            .content-history-img img {
+                width: 100%;
+            }
+
+            .content-history-img {
+                margin: 100px 0 0;
+            }
+
+            .main-menu-img {
+                margin: auto;
+                height: 358px;
+                width: 100%;
+            }
+
+            .main-menu-img img {
+                width: 100%;
+            }
+
+            .footer-content-img .footer-img {
+                width: 90%;
+                margin: auto;
+            }
+            .copyright{
+                text-align: center;
+        }
+        }
+    
+
+        @media screen and (min-width:768px) {
+            .header-connection {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                display: flex;
+            }
+
+            .address-icon {
+                margin-left:8.53658536585366%;
+            }
+
+            .address-txt {
+                margin-left: 0.914634146341463%;
+            }
+
+            .phone-icon {
+                margin-left: 1.82926829268293%;
+            }
+
+            .phone-txt {
+                margin-left:  0.914634146341463%;
+            }
+
+            .header-content-title {
+                width: 100%;
+                display: flex;
+                height: 130px;
+                line-height: 130px;
+                /* background-color: blue; */
+                position: relative;
+                z-index: 1;
+            }
+
+            .header-content-mark {
+                margin: 30px 0 0 9.14634146341463%;
+            }
+
+            .header-content-nav {
+                margin-left: 14.0243902439024%;
+                display: flex;
+            }
+
+            .header-content-icon {
+                color: #fff;
+                margin-left: 14.3292682926829%;
+                font-size: 20px;
+
+            }
+
+            .social-link {
+                padding-left:27.7439024390244%;
+            }
+
+            .menu {
+                position: relative;
+                left: 9.14634146341463%;
+                width: 27.2357723577236%;
+            }
+
+            .main-content {
+                width: 100%;
+                display: flex;
+            }
+
+            .content-history {
+                width: 35.3658536585366%;
+                margin-left: 9.14634146341463%;
+            }
+
+            .content-history-img {
+                margin: 100px 0 0 5.48780487804878%;
+            }
+
+            .main-menu {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                padding-bottom: 50px;
+                /* margin: auto; */
+            }
+
+            .main-menu-img {
+                /* margin: auto; */
+                height: 358px;
+                width: 25%;
+            }
+
+            .footer-col-content {
+                display: flex;
+            }
+
+            .col1,
+            .col2,
+            .col3,
+            .col4 {
+                margin: auto;
+                width: 20%;
+                color: #fff;
+            }
+
+            .footer-content-img {
+                display: flex;
+            }
+
+            .footer-img:first-child {
+                margin-left: 9.14634146341463%;
+            }
+            .copyright{
+            display: flex;
+        }
+        }
+        @media screen and (max-width:1024px){
+            .content-history{
+                margin-left: 5.21512385919166%;
+                width: 93.4810951760104%;
+            }
+
+            .content-history-img {
+                width: 100%;
+                margin: 0;
+            }
+
+            .content-history-img img {
+                width: 100%;
+            }
+
+            .content-history-img {
+                margin: 100px 0 0;
+            }
+            .main-menu {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                padding-bottom: 50px;
+                /* margin: auto; */
+            }
+
+            .main-menu-img {
+                /* margin: auto; */
+                height: 358px;
+                width: 50%;
+            }
+            .main-menu-img img{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-connection">
+        <div class="address-icon">
+            <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="address-txt">
+            <p>Address: 4578 Marmora Road, Glasgow, D04 89GR</p>
+        </div>
+        <div class="phone-icon">
+            <i class="fas fa-phone"></i>
+        </div>
+        <div class="phone-txt">
+            <p>Phones: (800) 123-0045; (800) 123-0046</p>
+        </div>
+        <div class="social-link">
+            <a href="#"> <i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter-square"></i></a>
+            <a href="#"> <i class="fab fa-vimeo-square"></i></a>
+            <a href="#"><i class="fab fa-youtube-square"></i></a>
+            <a href="#"><i class="fab fa-pinterest-square"></i></a>
+            <a href="#"> <i class="fab fa-instagram-square"></i></a>
+        </div>
+
+    </div>
+    <div class="header-content">
+        <div class="header-content-title">
+            <div class="header-content-mark">
+                <img src="317pic/asset 0.png" alt="MANUFAX-Mark">
+            </div>
+            <div class="header-content-nav">
+                <input type="checkbox" id="menu-control">
+                <label for="menu-control" class="menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <nav>
+                    <a href="#">HOME</a>
+                    <a href="#">ABOUT</a>
+                    <a href="#">SERVICES</a>
+                    <a href="#">PROJECTS</a>
+                    <a href="#">BLOG</a>
+                    <a href="#">CONTACTS</a>
+                </nav>
+                <div class="header-content-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+
+            </div>
+        </div>
+        <div class="header-content-img">
+            <img src="317pic/asset 1.png" alt="CONSTRUCTION">
+            <div class="header-content-img-txt">
+                <h1>CONSTRUCTION</h1>
+                <P>SEE HOW A 10-STORIES TOW'S BEING BUILT, IN A TIME-LAPES!</P>
+                <button>
+                    SEE OUR RECENT PROJECTS
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="content-introduction">
+        <div class="divider">
+            <span class="divider-separator"></span>
+        </div>
+        <div class="content-introduction-title">
+            <h2>OUR SERVICES</h2>
+        </div>
+        <div class="content-introduction-menu">
+            <div class="menu">
+                <i class="fas fa-home"></i>
+                <div class="menu-txt">
+                    <h3>BUILDING INFORMATION MODELING</h3>
+                    <p>Oftentimes physical and functional essence of any construction project needs to be represented
+                        digitally, in a 3D model format. In...</p>
+                </div>
+            </div>
+            <div class="menu">
+                <i class="fab fa-codepen"></i>
+                <div class="menu-txt">
+                    <h3>CONSTRUCTION SERVICES</h3>
+                    <p>Our customers love the pace/quality tempo that we show during each of the principal construction
+                        processes! We're comfortable with any...</p>
+                </div>
+            </div>
+            <div class="menu">
+                <i class="fas fa-th"></i>
+                <div class="menu-txt">
+                    <h3>PRE-CONSTRUCTION SERVICES</h3>
+                    <p>We take our time on initial planning before any construction begins, to balance all the financial
+                        and
+                        efficiency issues beforehand.This...</p>
+                </div>
+            </div>
+            <div class="menu">
+                <i class="fas fa-edit"></i>
+                <div class="menu-txt">
+                    <h3>DESIGN-BUILD</h3>
+                    <p>If a project is not too complex, we may hire a designer-builder type of contractor, to make the
+                        longevity of...</p>
+                </div>
+            </div>
+            <div class="menu">
+                <i class="far fa-building"></i>
+                <div class="menu-txt">
+                    <h3>CONSTRUCTION MANAGEMENT</h3>
+                    <p>Construction project management is essential. We're using the most time and iterations efficient
+                        life
+                        cycles for that.As you may know,...</p>
+                </div>
+            </div>
+            <div class="menu">
+                <i class="far fa-address-book"></i>
+                <div class="menu-txt">
+                    <h3>GENERAL CONTRACTING</h3>
+                    <p>We have a long list of professional contractors, whom our engineers and architects enjoy to work
+                        with
+                        on a majority...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-history">
+            <div class="divider">
+                <span class="separator"></span>
+            </div>
+            <div class="content-history-txt">
+                <h2>OUR HISTORY</h2>
+                <h3>OUR CONSTRUCTION COMPANY HAS BEEN FOUNDED 10 YEARS AGO, AT THE VERY PEAK OF THE BUILDING FRENZY IN
+                    THE US…
+                </h3>
+                <p>
+                    Since then we’ve built hundreds of commercial, government and private buildings and facilities. It
+                    may not sound like a lot, but if you estimate the manpower, working hours, materials, planning and
+                    correlating that were all involved in completing each separate project, then our productivity is
+                    immense!
+                </p>
+                <div class="read-button">
+                    READ MORE</div>
+            </div>
+        </div>
+        <div class="content-history-img">
+            <img src="317pic/asset 4.png" alt="">
+        </div>
+    </div>
+    <div class="main-menu">
+        <div class="main-menu-img">
+            <img src="317pic/asset 9.jpeg" width="410p" alt="COMMERCIAL">
+            <h3>COMMERCIAL</h3>
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 10.jpeg" width="410" alt="CULTURAL/LIFESTYLE">
+            <h3>CULTURAL/LIFESTYLE</h3>
+
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 11.jpeg" width="410" alt="DATA/TECHNOLOGY">
+            <h3>DATA/TECHNOLOGY</h3>
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 12.jpeg" width="410" alt="EDUCATIONAL">
+            <h3>EDUCATIONAL</h3>
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 13.jpeg" width="410" alt="GOVERNMENT/MILITARY">
+            <h3>GOVERNMENT/MILITARY</h3>
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 14.jpeg" width="410" alt="HEALTHCARE">
+            <h3>HEALTHCARE</h3>
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 15.jpeg" width="410" alt="MANUFACTURING/INDUSTRIAL">
+            <h3>MANUFACTURING/INDUSTRIAL</h3>
+        </div>
+        <div class="main-menu-img">
+            <img src="317pic/asset 16.jpeg" width="410" alt="WAREHOUSE/LOGISTICS">
+            <h3>WAREHOUSE/LOGISTICS</h3>
+        </div>
+    </div>
+    <div class="footer-content">
+        <div class="divider">
+            <span class="divider-separator"></span>
+        </div>
+        <div class="footer-content-title">
+            <h2>RECENT NEWS</h2>
+        </div>
+    </div>
+    <div class="footer-content-img">
+        <div class="footer-img">
+            <img src="317pic/asset 5.jpeg" alt="FUTURE PROOFING HOSPITALS">
+            <h3>FUTURE PROOFING HOSPITALS</h3>
+            <div class="txt">
+                Posted by
+                <p class="author">adminDecember </p>
+                <p class="time">7, 2018</p>
+                <p class="txt">By improving the physical layout of hospitals and medical facilities, we can enhance and
+                    increase safety mechanisms, improve care, and…</p>
+            </div>
+        </div>
+        <div class="footer-img">
+            <img src="317pic/asset 6.jpeg" alt="BIKE PARTS WAREHOUSE, DE">
+            <h3>BIKE PARTS WAREHOUSE, DE</h3>
+            <div class="txt">
+                Posted by
+                <p class="author">adminDecember</p>
+                <p class="time"> 7, 2018</p>
+                <p class="txt"> Delaware proved to be a very friendly place to work at… While invited there for
+                    completing a mid-sized warehouse for…</p>
+            </div>
+        </div>
+        <div class="footer-img">
+            <img src="317pic/asset 7.jpeg" alt="JOY HOTEL & CASINO">
+            <h3>JOY HOTEL & CASINO</h3>
+            <div class="txt">
+                Posted by
+                <p class="author">adminDecember</p>
+                <p class="time">7, 2018</p>
+                <p class="txt">This hotel & casino complex is our most recent completed building… The whole structure
+                    that took us 6 months to…</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer-content-button">
+        SEE ALL NEWS
+    </div>
+    <div class="footer-col">
+        <div class="footer-col-content">
+            <div class="col1">
+                <img src="317pic/asset 8.png" alt="">
+                <p>Construction’s core values have been shaped over more than 10 years of delivering the finest
+                    construction services to our clients. They stood to the test of time and these principles remain our
+                    bedrock lynchpins. We never tried to cut on either quality, the pace of work or any other
+                    construction aspect. We stay true to our full promise of efficiency!</p>
+            </div>
+            <div class="col2">
+                <h3>NAVIGATION</h3>
+                <p>Home</p>
+                <ul>
+                    <li>
+                        <a href="#">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Blog
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Contacts
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="col3">
+                <h3>RECENT COMMENTS</h3>
+                <p>The art and science of color planning for performance requirements
+                </p>
+                <p>Posted by admin</p>
+                <p>Future proofing hospitals
+                </p>
+                <p>Posted by admin</p>
+
+            </div>
+            <div class="col4">
+                <h3>CONTACTS</h3>
+                <p>
+                    Address: 4578 Marmora Road, Glasgow, D04 89GR
+                </p>
+                <p class="phone">Phones:</p>
+                <p class="num"> (800) 123-0045;</p>
+                <p>(800) 123-0046</p>
+                <p>Email: info@demolink.org</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="copyright">
+        <div class="txt">
+            <p>Manufax Theme © 2019. | Theme design by</p>
+        </div>
+        <div class="by">Zemez</div>
+        <div class="social-link">
+            <a href="#"> <i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter-square"></i></a>
+            <a href="#"> <i class="fab fa-vimeo-square"></i></a>
+            <a href="#"><i class="fab fa-youtube-square"></i></a>
+            <a href="#"><i class="fab fa-pinterest-square"></i></a>
+            <a href="#"> <i class="fab fa-instagram-square"></i></a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
