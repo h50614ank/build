@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        .col-12 {
+            text-align: center;
+        }
+        .container{
+            margin-top: 50px;
+        }
+        .pic{
+            margin-top: 50px;
+        }
+        .information{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-dark" onclick="iphone()">iPhone</button>
+                <button class="btn btn-dark" onclick="ipad()">iPad</button>
+                <button class="btn btn-dark" onclick="mac()">Mac</button>
+            </div>
+
+            <div class="pic col-6">
+            </div>
+            <div class="information col-6">
+                <div class="color">
+                </div>
+                <div class="type">
+                </div>
+                <div class="price">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var Product = {
+            IPhone: {
+                Detail: {
+                    productName: 'iPhone 11',
+                    baseImgUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-select-2019-family?wid=882&amp;hei=1058&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1567022175704'
+                },
+                OutWard: [{
+                        color: '白色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-white-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566956148115'
+                    },
+                    {
+                        color: '黑色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-black-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566956144418'
+                    },
+                    {
+                        color: '綠色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-green-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566956144838'
+                    },
+                    {
+                        color: '黃色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-yellow-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1568141245782'
+                    },
+                    {
+                        color: '紫色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-purple-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566960958082'
+                    },
+                    {
+                        color: '紅色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone11-red-select-2019?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1566956144763'
+                    },
+                ],
+                Spec: {
+                    Storge: [{
+                            size: '64GB',
+                            price: 24900
+                        },
+                        {
+                            size: '128GB',
+                            price: 26900
+                        },
+                        {
+                            size: '256GB',
+                            price: 30400
+                        },
+                    ]
+                }
+            },
+            IPad: {
+                Detail: {
+                    productName: 'iPad',
+                    baseImgUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-hero-unselected-201909_GEO_TW?wid=372&amp;hei=606&amp;fmt=jpeg&amp;qlt=95&amp;op_usm=0.5,0.5&amp;.v=1567298453562'
+                },
+                OutWard: [{
+                        color: '太空灰色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-wifi-select-space-201909_GEO_TW?wid=470&hei=556&fmt=png-alpha&.v=1567443080749'
+                    },
+                    {
+                        color: '銀色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-wifi-select-silver-201909_GEO_TW?wid=470&hei=556&fmt=png-alpha&.v=1567299773948'
+                    },
+                    {
+                        color: '金色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-wifi-select-gold-201909_GEO_TW?wid=470&hei=556&fmt=png-alpha&.v=1567302181892'
+                    },
+                ],
+                Spec: {
+                    Storge: [{
+                            size: '32GB',
+                            price: 10900
+                        },
+                        {
+                            size: '128GB',
+                            price: 13900
+                        },
+                    ]
+                }
+            },
+            MacPro: {
+                Detail: {
+                    productName: 'MacPro 13',
+                    baseImgUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mac-family-compare-201810?wid=750&hei=345&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1573512143888'
+                },
+                OutWard: [{
+                        color: '太空灰色', 
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-space-select-201911_GEO_TW?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1573165435411'
+                    },
+                    {
+                        color: '銀色',
+                        imageUrl: 'https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/mbp16touch-silver-select-201911_GEO_TW?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1573153623825'
+                    },
+                ],
+                Spec: {
+                    Storge: [{
+                            size: '256GB',
+                            price: 51300
+                        },
+                        {
+                            size: '512GB',
+                            price: 57300
+                        },
+                        {
+                            size: '1TB',
+                            price: 63300
+                        },
+                        {
+                            size: '2TB',
+                            price: 75300
+                        },
+                    ]
+                }
+            }
+        };
+        var pic = document.getElementsByClassName('pic')[0];
+        var color = document.getElementsByClassName('color')[0];
+        var type = document.getElementsByClassName('type')[0];
+        var price = document.getElementsByClassName('price')[0];
+        var color_div = document.createElement('div');
+        var type_div = document.createElement('div');
+        var price_div = document.createElement('div');
+        var title_price = document.createElement('div');
+        var txt_price = document.createElement('h2');
+        var btn_storge = document.createElement('div');
+        type.appendChild(type_div);
+        color.appendChild(color_div);
+        price.appendChild(price_div);
+        price.appendChild(title_price);
+        price.appendChild(txt_price);
+
+        function iphone() {
+            type_div.innerHTML = '';
+            color_div.innerHTML = '';
+            price_div.innerHTML = '';
+            title_price.innerHTML = '';
+            txt_price.innerHTML = '';
+            pic.innerHTML = `<img src="${Product.IPhone.Detail.baseImgUrl}" alt="IPhone" class='d-block w-100'>`
+            add_iphone_color_btn();
+            add_iphone_storge_btn();
+            add_iphone_price();
+        }
+        function add_iphone_color_btn() {
+            color_div.innerHTML = '<h3 class="color mt-5">外觀</h3>';
+            color_div.innerHTML +=
+                `<div>
+                    <button class="btn btn_iphone_color btn-outline-secondary ml-2 mt-5" onclick='iphone_pic_white()'>
+                        ${Product.IPhone.OutWard[0].color}
+                    </button> 
+                    <button class="btn btn_iphone_color btn-outline-secondary ml-2 mt-5 " onclick='iphone_pic_black()'>
+                        ${Product.IPhone.OutWard[1].color}
+                    </button>
+                    <button class="btn btn_iphone_color btn-outline-secondary ml-2 mt-5 " onclick='iphone_pic_green()'>
+                        ${Product.IPhone.OutWard[2].color}
+                    </button>
+                    <button class="btn btn_iphone_color btn-outline-secondary ml-2 mt-5 " onclick='iphone_pic_yellow()'>
+                        ${Product.IPhone.OutWard[3].color}
+                    </button> 
+                    <button class="btn btn_iphone_color btn-outline-secondary ml-2 mt-5 " onclick='iphone_pic_purple()'>
+                        ${Product.IPhone.OutWard[4].color}
+                    </button>
+                    <button class="btn btn_iphone_color btn-outline-secondary ml-2 mt-5 " onclick='iphone_pic_red()'>
+                        ${Product.IPhone.OutWard[5].color}
+                    </button>
+                </div>`;
+        }
+
+        function iphone_pic_white() {
+            pic.innerHTML = `<img src="${Product.IPhone.OutWard[0].imageUrl}" alt="IPhone" class='d-block w-100'>`
+        }
+
+        function iphone_pic_black() {
+            pic.innerHTML = `<img src="${Product.IPhone.OutWard[1].imageUrl}" alt="IPhone" class='d-block w-100'>`
+        }
+
+        function iphone_pic_green() {
+            pic.innerHTML = `<img src="${Product.IPhone.OutWard[2].imageUrl}" alt="IPhone" class='d-block w-100'>`
+        }
+
+        function iphone_pic_yellow() {
+            pic.innerHTML = `<img src="${Product.IPhone.OutWard[3].imageUrl}" alt="IPhone" class='d-block w-100'>`
+        }
+
+        function iphone_pic_purple() {
+            pic.innerHTML = `<img src="${Product.IPhone.OutWard[4].imageUrl}" alt="IPhone" class='d-block w-100'>`
+        }
+
+        function iphone_pic_red() {
+            pic.innerHTML = `<img src="${Product.IPhone.OutWard[5].imageUrl}" alt="IPhone" class='d-block w-100'>`
+        }
+
+        function add_iphone_price() {
+            title_price.innerHTML = '<h3 class="color mt-5">價格試算</h3>';
+        }
+
+        function add_iphone_storge_btn() {
+            type_div.innerHTML = '<h3  class="mt-5">規格</h3>';
+            type_div.innerHTML +=
+                `<div>
+                    <button class="btn btn_iphone_storge btn-outline-secondary mx-2 mt-5 " onclick='iphone_price1()'><span class='text-center d-block'>${Product.IPhone.Spec.Storge[0].size}</span><span class="d-block text-center">NT$${Product.IPhone.Spec.Storge[0].price}</span></button> 
+                    <button class="btn btn_iphone_storge btn-outline-secondary mx-2 mt-5 " onclick='iphone_price2()'><span class='text-center d-block'>${Product.IPhone.Spec.Storge[1].size}</span><span class="d-block text-center">NT$${Product.IPhone.Spec.Storge[1].price}</span></button>
+                    <button class="btn btn_iphone_storge btn-outline-secondary mx-2 mt-5 " onclick='iphone_price3()'><span class='text-center d-block'>${Product.IPhone.Spec.Storge[2].size}</span><span class="d-block text-center">NT$${Product.IPhone.Spec.Storge[2].price}</span></button>
+                    </div>`;
+        }
+        function iphone_price1() {
+            txt_price.innerHTML = `NT$ ${Product.IPhone.Spec.Storge[0].price}`;
+        }
+
+        function iphone_price2() {
+            txt_price.innerHTML = `NT$ ${Product.IPhone.Spec.Storge[1].price}`;
+        }
+
+        function iphone_price3() {
+            txt_price.innerHTML = `NT$ ${Product.IPhone.Spec.Storge[2].price}`;
+        }
+
+
+        function ipad() {
+            type_div.innerHTML = '';
+            color_div.innerHTML = '';
+            price_div.innerHTML = '';
+            title_price.innerHTML = '';
+            txt_price.innerHTML = '';
+            pic.innerHTML = `<img src="${Product.IPad.Detail.baseImgUrl}" alt="IPad" class='d-block w-100 '>`
+            add_ipad_color_btn();
+            add_ipad_storge_btn();
+            add_ipad_price();
+        }
+        function add_ipad_color_btn() {
+            color_div.innerHTML = '<h3 class="mt-5">顏色</h3>';
+            color_div.innerHTML +=
+                `<div>
+                <button class="btn btn_ipad_color btn-outline-secondary mx-2 mt-5" onclick='ipad_pic_gray()'>
+                    ${Product.IPad.OutWard[0].color}
+                    </button> 
+                <button class="btn btn_ipad_color btn-outline-secondary mx-2 mt-5" onclick='ipad_pic_silver()'>
+                    ${Product.IPad.OutWard[1].color}
+                    </button>
+                <button class="btn btn_ipad_color btn-outline-secondary mx-2 mt-5" onclick='ipad_pic_gold()'>
+                    ${Product.IPad.OutWard[2].color}
+                    </button>
+                </div>`;
+        }
+
+        function ipad_pic_gray() {
+            pic.innerHTML = `<img src="${Product.IPad.OutWard[0].imageUrl}" alt="IPad" class='d-block w-100 mt-5'>`
+        }
+
+        function ipad_pic_silver() {
+            pic.innerHTML = `<img src="${Product.IPad.OutWard[1].imageUrl}" alt="IPad" class='d-block w-100 mt-5'>`
+        }
+
+        function ipad_pic_gold() {
+            pic.innerHTML = `<img src="${Product.IPad.OutWard[2].imageUrl}" alt="IPad" class='d-block w-100 mt-5'>`
+        }
+
+        function add_ipad_storge_btn() {
+            type_div.innerHTML = '<h3 class="mt-5">規格</h3>';
+            type_div.innerHTML +=
+                `<div>
+                    <button class="btn btn_ipad_storge btn-outline-secondary mr-2 mt-5 " onclick='ipad_price1()'><span class='text-center d-block'>${Product.IPad.Spec.Storge[0].size}</span><span class="d-block text-center">NT$${Product.IPad.Spec.Storge[0].price}</span></button> 
+                    <button class="btn btn_ipad_storge btn-outline-secondary ml-2 mt-5 " onclick='ipad_price2()'><span class='text-center d-block'>${Product.IPad.Spec.Storge[1].size}</span><span class="d-block text-center">NT$${Product.IPad.Spec.Storge[1].price}</span></button>
+                    </div>`;
+        }
+        function add_ipad_price() {
+            title_price.innerHTML = '<h3 class="mt-5">價格試算</h3>';
+        }
+
+        function ipad_price1() {
+            txt_price.innerHTML = `NT$ ${Product.IPad.Spec.Storge[0].price}`;
+        }
+
+        function ipad_price2() {
+            txt_price.innerHTML = `NT$ ${Product.IPad.Spec.Storge[1].price}`;
+        }
+
+
+       
+
+
+        function mac() {
+            type_div.innerHTML = '';
+            color_div.innerHTML = '';
+            price_div.innerHTML = '';
+            title_price.innerHTML = '';
+            txt_price.innerHTML = '';
+            pic.innerHTML = `<img src="${Product.MacPro.Detail.baseImgUrl}" alt=Macbook-pro class='d-block w-100 mt-5'>`
+            add_mac_color_btn();
+            add_mac_storge_btn();
+            add_mac_price();
+        }
+        function add_mac_color_btn() {
+            color_div.innerHTML = '<h3  class="mt-5">顏色</h3>';
+            color_div.innerHTML +=
+                `<div>
+                <button class="btn btn_mac_color btn-outline-secondary ml-2 " onclick='mac_pic_gray()'>
+                    ${Product.MacPro.OutWard[0].color}
+                    </button> 
+                <button class="btn btn_mac_color btn-outline-secondary ml-2 " onclick='mac_pic_silver()'>
+                    ${Product.MacPro.OutWard[1].color}
+                    </button>
+                </div>`;
+        }
+
+        function mac_pic_gray() {
+            pic.innerHTML = `<img src="${Product.MacPro.OutWard[0].imageUrl}" alt=Macbook-pro class='d-block w-100'>`
+        }
+
+        function mac_pic_silver() {
+            pic.innerHTML = `<img src="${Product.MacPro.OutWard[1].imageUrl}" alt=Macbook-pro class='d-block w-100'>`
+        }
+
+
+        function add_mac_price() {
+            title_price.innerHTML = '<h3  class="mt-2">價格試算</h3>';
+        }
+
+        function add_mac_storge_btn() {
+            type_div.innerHTML = '<h3  class="mt-2">規格</h3>';
+            type_div.innerHTML +=
+                `<div>
+                    <button class="btn btn_mac_storge btn-outline-secondary ml-2  " onclick='show_mac_price1()'><span class='text-center d-block'>${Product.MacPro.Spec.Storge[0].size}</span><span class="d-block text-center">NT$${Product.MacPro.Spec.Storge[0].price}</span></button> 
+                    <button class="btn btn_mac_storge btn-outline-secondary ml-2 " onclick='show_mac_price2()'><span class='text-center d-block'>${Product.MacPro.Spec.Storge[1].size}</span><span class="d-block text-center">NT$${Product.MacPro.Spec.Storge[1].price}</span></button>
+                    <button class="btn btn_mac_storge btn-outline-secondary ml-2 " onclick='show_mac_price3()'><span class='text-center d-block'>${Product.MacPro.Spec.Storge[2].size}</span><span class="d-block text-center">NT$${Product.MacPro.Spec.Storge[2].price}</span></button> 
+                    <button class="btn btn_mac_storge btn-outline-secondary ml-2 " onclick='show_mac_price4()'><span class='text-center d-block'>${Product.MacPro.Spec.Storge[3].size}</span><span class="d-block text-center">NT$${Product.MacPro.Spec.Storge[3].price}</span></button>
+                    </div>`;
+        }
+
+
+        function show_mac_price1() {
+            txt_price.innerHTML = `NT$ ${Product.MacPro.Spec.Storge[0].price}`;
+        }
+
+        function show_mac_price2() {
+            txt_price.innerHTML = `NT$ ${Product.MacPro.Spec.Storge[1].price}`;
+        }
+
+        function show_mac_price3() {
+            txt_price.innerHTML = `NT$ ${Product.MacPro.Spec.Storge[2].price}`;
+        }
+
+        function show_mac_price4() {
+            txt_price.innerHTML = `NT$ ${Product.MacPro.Spec.Storge[3].price}`;
+        }
+
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

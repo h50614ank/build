@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Calculator</title>
+    <style>
+        html{
+            background-color:darkorange;
+        }
+        .button {
+            border: none;
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            background-color: #000;
+            color: #fff;
+            /* border-radius: 10%; */
+        }
+
+        .answer {
+            border: none;
+            width: 210px;
+            font-size: 25px;
+            border-radius: 2%;
+            padding: 5px;
+
+        }
+        .calculator{
+            position: absolute;
+            left: 42%;
+            top: 20%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <form action="">
+            <input class="answer" id="answer" type="text">
+        </form>
+        <table>
+            <tr>
+                <td><input class="button bg-secondary mt-1 " type="button" value="C" onclick="clearNum()"></td>
+                <td><input class="button bg-secondary mt-1" type="button" value="<" onclick="back()"></td>
+                <td><input class="button bg-secondary mt-1" type="button" value="/" onclick="insert('/')"></td>
+                <td><input class="button bg-primary mt-1" type="button" value="X" onclick="insert('*')"></td>
+            </tr>
+            <tr>
+                <td><input class="button" type="button" value="7" onclick="insert(7)"></td>
+                <td><input class="button" type="button" value="8" onclick="insert(8)"></td>
+                <td><input class="button" type="button" value="9" onclick="insert(9)"></td>
+                <td><input class="button bg-primary" type="button" value="-" onclick="insert('-')"></td>
+            </tr>
+            <tr>
+                <td><input class="button" type="button" value="4" onclick="insert(4)"></td>
+                <td><input class="button" type="button" value="5" onclick="insert(5)"></td>
+                <td><input class="button" type="button" value="6" onclick="insert(6)"></td>
+                <td><input class="button bg-primary" type="button" value="+" onclick="insert('+')"></td>
+            </tr>
+            <tr>
+                <td><input class="button" type="button" value="1" onclick="insert(1)"></td>
+                <td><input class="button" type="button" value="2" onclick="insert(2)"></td>
+                <td><input class="button" type="button" value="3" onclick="insert(3)"></td>
+                <td rowspan="2"><input style="height:102px;" class="button bg-primary" type="button" value="=" onclick="equal()"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input style="width: 102px;" class="button" type="button" value="0" onclick="insert(0)">
+                </td>
+                <td><input class="button" type="button" value="."
+                        onclick="insert('.')"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function insert(num) {
+            document.getElementById('answer').value += num
+        }
+
+        function equal() {
+            var exp = document.getElementById('answer').value
+            if (exp) {
+                document.getElementById('answer').value = eval(exp)
+            }
+        }
+
+        function clearNum() {
+            document.getElementById('answer').value = "";
+        }
+
+        function back() {
+            var exp = document.getElementById('answer').value
+            document.getElementById('answer').value = exp.substring(0, exp.length - 1)
+        }
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
