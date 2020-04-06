@@ -125,7 +125,7 @@
             if (countofA == 4) {
                 showall.innerHTML =
                     `<span style="background-color: #16982b; color:#fff;">${countofA}A${countofB}B</span> <span>${input_str}</span>`;
-                var success = setTimeout("alert('遊戲結束')", 300);
+                var success = setTimeout("alert('你猜對了')", 300);
                 for (let game of before) {
                     game.removeAttribute('disabled');
                     input.value = '';
