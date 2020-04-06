@@ -19,21 +19,26 @@
             <div class="col-12 col-md-6 mx-auto">
                 <div class="btn-group w-100 " role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-light game-start-before" onclick="create_answer()">開始</button>
-                    <button type="button" class="btn btn-light game-start-after" onclick="restart_game()" disabled="disabled">放棄重來</button>
-                    <button type="button" class="btn btn-light game-start-after" onclick="show_answer()" disabled="disabled">看答案</button>
+                    <button type="button" class="btn btn-light game-start-after" onclick="restart_game()"
+                        disabled="disabled">放棄重來</button>
+                    <button type="button" class="btn btn-light game-start-after" onclick="show_answer()"
+                        disabled="disabled">看答案</button>
                 </div>
 
-                <div class="txt_promot">
-                <div></div>
-                </div>
+               
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">猜數字</span>
                     </div>
-                    <input type="text" class="form-control game-start-after" name="inputnumber" id="inputnumber" disabled="disabled">
+                    <input type="text" class="form-control game-start-after" name="inputnumber" id="inputnumber"
+                        disabled="disabled">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary game-start-after" type="button" onclick="guess_number()" disabled="disabled">猜!</button>
+                        <button class="btn btn-outline-secondary game-start-after" type="button"
+                            onclick="guess_number()" disabled="disabled">猜!</button>
                     </div>
+                </div>
+                <div class="txt_promot">
+                    <div></div>
                 </div>
             </div>
         </div>
@@ -45,17 +50,18 @@
         var input_num = new Array();
         var after = document.getElementsByClassName('game-start-after');
         var before = document.getElementsByClassName('game-start-before');
-        var txt_promot=document.getElementsByClassName('txt_promot')[0];
+        var txt_promot = document.getElementsByClassName('txt_promot')[0];
         var promot = document.createElement('div');
         txt_promot.appendChild(promot);
-        var input =document.getElementById('inputnumber');
+        var input = document.getElementById('inputnumber');
         for (let game of after) {
             game.setAttribute('disabled', 'disabled');
         }
+
         function create_answer() {
-            answer_str='';
-            input.value='';
-            promot.innerHTML='';
+            answer_str = '';
+            input.value = '';
+            promot.innerHTML = '';
             txt_promot.removeChild(promot);
             for (let i = 0; i < 4; i++) {
                 answer_num[i] = Math.round(Math.random() * 8 + 1);
@@ -71,8 +77,8 @@
                 game.removeAttribute('disabled');
             }
             for (let game of before) {
-            game.setAttribute('disabled', 'disabled');
-        }
+                game.setAttribute('disabled', 'disabled');
+            }
             console.log(answer_str);
             console.log(answer_num);
         }
@@ -85,9 +91,9 @@
             console.log(input_num);
             JudgeAB();
             show_countofAB();
-            countofA=0;
-            countofB=0;
-            input.value='';
+            countofA = 0;
+            countofB = 0;
+            input.value = '';
         }
 
         function stringtoarray() {
@@ -96,7 +102,9 @@
             }
         }
 
-        var countofA = 0, countofB = 0;
+        var countofA = 0,
+            countofB = 0;
+
         function JudgeAB() {
             var intersect = answer_num.filter(num => input_num.includes(num));
             console.log(intersect);
@@ -110,22 +118,21 @@
             countofB = total - countofA;
             console.log(`${countofA}A${countofB}B`);
         }
-        
+
         function show_countofAB() {
             var showall = document.createElement('div');
-            showall.id='showall'
-            if(countofA==4)
-            {
-                showall.innerHTML = `<span style="background-color: #16982b; color:#fff;">${countofA}A${countofB}B</span> <span>${input_str}</span>`;
-                var success=setTimeout("alert('遊戲結束')",300);
+            showall.id = 'showall'
+            if (countofA == 4) {
+                showall.innerHTML =
+                    `<span style="background-color: #16982b; color:#fff;">${countofA}A${countofB}B</span> <span>${input_str}</span>`;
+                var success = setTimeout("alert('遊戲結束')", 300);
                 for (let game of before) {
-                game.removeAttribute('disabled');
-                input.value='';
-            }
-            }
-            else
-            {
-                showall.innerHTML = `<span style="background-color: red;color:#fff; ">${countofA}A${countofB}B</span> <span>${input_str}</span>`;
+                    game.removeAttribute('disabled');
+                    input.value = '';
+                }
+            } else {
+                showall.innerHTML =
+                    `<span style="background-color: red;color:#fff; ">${countofA}A${countofB}B</span> <span>${input_str}</span>`;
             }
             promot.appendChild(showall);
         }
@@ -133,8 +140,8 @@
         function show_answer() {
             alert(`答案是${answer_str}`);
         }
-        function restart_game()
-        {
+
+        function restart_game() {
             alert(`答案是${answer_str}`);
             create_answer();
         }
