@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        border: 1px solid #000;
+    }
+
+    tr:nth-child(even) {
+        background-color: aquamarine;
+    }
+
+    tr,
+    th,
+    td {
+        border: 1px solid #000;
+        font-size: 20px;
+    }
+
+    img {
+        width: 100px;
+    }
+</style>
+
+<body>
+
+    <h1>Apple iPad</h1>
+    <button onclick="skuupsort()">編號小到大排序</button>
+    <button onclick="skusort()">編號大到小排序</button>
+    <button onclick="priceupsort()">價錢低至高排序</button>
+    <button onclick="pricesort()">編號高至低排序</button>
+
+    <!-- <div id="msg"></div> -->
+
+
+    <script>
+        // console.log(Object.keys(employees[0]))
+        // console.log(Object.values(employees[0]))
+        // let ipad_expensive=ipads.filter(item=>item.price>15000)
+        var ipad = "";
+        window.onload = function () {
+
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                // document.getElementById("msg").innerHTML = this.responseText;
+                ipad = JSON.parse(this.responseText);
+                addthead();
+                addbody();
+            }
+            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.send();
+
+
+        }
+
+        function skuupsort() {
+            var table = document.getElementsByTagName('table')[0];
+            table.remove(true);
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                ipad = JSON.parse(this.responseText);
+                console.log(ipad)
+
+                skusortup()
+                addthead();
+                addbody();
+            }
+            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.send();
+
+        }
+
+        function skusortup() {
+            ipad = ipad.sort(function (a, b) {
+                return a.sku > b.sku ? 1 : -1;
+            });
+        }
+
+        function skusort() {
+            var table = document.getElementsByTagName('table')[0];
+            table.remove(true);
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                ipad = JSON.parse(this.responseText);
+                console.log(ipad)
+
+                skusortdown()
+                addthead();
+                addbody();
+            }
+            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.send();
+
+        }
+
+        function skusortdown() {
+            ipad = ipad.sort(function (a, b) {
+                return a.sku < b.sku ? 1 : -1;
+            });
+        }
+        
+        function priceupsort() {
+            var table = document.getElementsByTagName('table')[0];
+            table.remove(true);
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                ipad = JSON.parse(this.responseText);
+                console.log(ipad)
+
+                pricesortup()
+                addthead();
+                addbody();
+            }
+            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.send();
+
+        }
+
+        function pricesortup() {
+            ipad = ipad.sort(function (a, b) {
+                return a.price > b.price? 1 : -1;
+            });
+        }
+
+        function pricesort() {
+            var table = document.getElementsByTagName('table')[0];
+            table.remove(true);
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                ipad = JSON.parse(this.responseText);
+                console.log(ipad)
+
+                pricesortdown()
+                addthead();
+                addbody();
+            }
+            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.send();
+
+        }
+
+        function pricesortdown() {
+            ipad = ipad.sort(function (a, b) {
+                return a.price < b.price? 1 : -1;
+            });
+        }
+
+        function addthead() {
+
+            var table = document.createElement('table');
+            document.body.appendChild(table);
+            var thead = document.createElement('thead');
+            table.appendChild(thead);
+            for (var prop in ipad[0]) {
+                var th = document.createElement('th');
+                thead.appendChild(th);
+                th.innerHTML = prop;
+            }
+
+        }
+
+        function addbody() {
+            let table = document.getElementsByTagName('table')[0];
+            var tbody = document.createElement('tbody');
+            table.appendChild(tbody);
+
+            for (let i = 0; i < ipad.length; i++) {
+                var tr = document.createElement('tr');
+                tbody.appendChild(tr);
+                for (let prop in ipad[i]) {
+                    var td = document.createElement('td');
+                    tr.appendChild(td);
+                    td.innerHTML = ipad[i][prop];
+                }
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>
