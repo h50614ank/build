@@ -7,19 +7,46 @@
     <title>Document</title>
 </head>
 <style>
-    table {
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    h1{
+        text-align: center;
+        font-size: 40px;
+    }
+    table {width: 100%;
         border: 1px solid #000;
+        margin: auto;
+    }
+    th{
+        cursor: default;
+        background-color: #000;
+        color: #ddd;
+    }
+    th:hover{
+        cursor: default;
+        background-color:#ddd ;
+        color: #000;
     }
 
     tr:nth-child(even) {
-        background-color: aquamarine;
+        background-color: #000;
+        color: #ddd;
+    }
+    tr:nth-child(odd) {
+        background-color: #444;
+        color: #ddd;
+
     }
 
     tr,
     th,
     td {
+        padding: 0;
         border: 1px solid #000;
-        font-size: 20px;
+        font-size: 30px;
     }
 
     img {
@@ -30,10 +57,7 @@
 <body>
 
     <h1>Apple iPad</h1>
-    <button onclick="skuupsort()">編號小到大排序</button>
-    <button onclick="skusort()">編號大到小排序</button>
-    <button onclick="priceupsort()">價錢低至高排序</button>
-    <button onclick="pricesort()">編號高至低排序</button>
+
 
     <!-- <div id="msg"></div> -->
 
@@ -51,104 +75,66 @@
                 ipad = JSON.parse(this.responseText);
                 addthead();
                 addbody();
+                // var th_sku = document.getElementsByTagName("th")[1]
+                // var th_price = document.getElementsByTagName("th")[2]
+                // th_sku.onclick = thsort;
+                // th_price.onclick = priceonclick;
+                var the= document.getElementsByTagName("th")
+                console.log(the)
+                for (let item of the) {
+                    // th[i].attachEvent("onclick",_clicki);
+                    item.onclick = function() {
+                        // alert(1111);
+                        _thsort(item);
+                    }
+                }
             }
             xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
             xhr.send();
-
-
         }
-
-        function skuupsort() {
-            var table = document.getElementsByTagName('table')[0];
-            table.remove(true);
-            let xhr = new XMLHttpRequest;
-            xhr.onload = function () {
-                ipad = JSON.parse(this.responseText);
-                console.log(ipad)
-
-                skusortup()
-                addthead();
-                addbody();
-            }
-            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
-            xhr.send();
-
-        }
-
-        function skusortup() {
+        function _thsort(btn){
+            // alert(1111);
+            var type = btn.innerHTML;
+            var tbody = document.getElementsByTagName('tbody')[0];
+            tbody.remove(true);
             ipad = ipad.sort(function (a, b) {
-                return a.sku > b.sku ? 1 : -1;
+                return a[type] > b[type] ? 1 : -1;
             });
+            addbody();
         }
 
-        function skusort() {
-            var table = document.getElementsByTagName('table')[0];
-            table.remove(true);
+        // function skuonclick(btn) {
+        //     var type = btn.id
+        //     var tbody = document.getElementsByTagName('tbody')[0];
+        //     tbody.remove(true);
+        //     ipad = ipad.sort(function (a, b) {
+        //         return a[type] > b[type] ? 1 : -1;
+        //     });
+        //     addbody();
+        // }
+
+
+        function priceonclick() {
+            var tbody = document.getElementsByTagName('tbody')[0];
+            tbody.remove(true);
             let xhr = new XMLHttpRequest;
             xhr.onload = function () {
                 ipad = JSON.parse(this.responseText);
                 console.log(ipad)
-
-                skusortdown()
-                addthead();
+                pricesortup();
                 addbody();
             }
-            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.open("GET", "http://127.0.0.1:5500/HTML/iPad.json");
             xhr.send();
-
-        }
-
-        function skusortdown() {
-            ipad = ipad.sort(function (a, b) {
-                return a.sku < b.sku ? 1 : -1;
-            });
-        }
-        
-        function priceupsort() {
-            var table = document.getElementsByTagName('table')[0];
-            table.remove(true);
-            let xhr = new XMLHttpRequest;
-            xhr.onload = function () {
-                ipad = JSON.parse(this.responseText);
-                console.log(ipad)
-
-                pricesortup()
-                addthead();
-                addbody();
-            }
-            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
-            xhr.send();
-
         }
 
         function pricesortup() {
             ipad = ipad.sort(function (a, b) {
-                return a.price > b.price? 1 : -1;
+                return a.price > b.price ? 1 : -1;
             });
         }
 
-        function pricesort() {
-            var table = document.getElementsByTagName('table')[0];
-            table.remove(true);
-            let xhr = new XMLHttpRequest;
-            xhr.onload = function () {
-                ipad = JSON.parse(this.responseText);
-                console.log(ipad)
 
-                pricesortdown()
-                addthead();
-                addbody();
-            }
-            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
-            xhr.send();
-
-        }
-
-        function pricesortdown() {
-            ipad = ipad.sort(function (a, b) {
-                return a.price < b.price? 1 : -1;
-            });
-        }
 
         function addthead() {
 
@@ -185,3 +171,4 @@
 </body>
 
 </html>
+
