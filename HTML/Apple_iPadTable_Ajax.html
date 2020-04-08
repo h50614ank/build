@@ -95,18 +95,24 @@
 
             console.log(isDesc)
             // alert(1111);
-            var type = btn.innerHTML;
+            var type = btn.id;
             var tbody = document.getElementsByTagName('tbody')[0];
             tbody.remove(true);
+            
             if (!isDesc) {
+                
                 ipad1.sort(function (a, b) {
                     return a[type] > b[type] ? 1 : -1;
                 });
+                console.log(ipad1)
             } else {
                 ipad1.sort(function (a, b) {
                     return a[type] < b[type] ? 1 : -1;
                 });
+                console.log(ipad1)
+
             }
+            
             addbody();
             if (!isDesc) {
                 isDesc = true
@@ -132,8 +138,9 @@
             table.appendChild(thead);
             for (var prop in ipad1[0]) {
                 var th = document.createElement('th');
-                thead.appendChild(th);
                 th.innerHTML = prop + `<i class="fas fa-sort"></i>`;
+                th.setAttribute('id',prop)
+                thead.appendChild(th);
 
             }
 
