@@ -17,7 +17,8 @@
             width: 100%;
             text-align: center;
         }
-        .container{
+
+        .container {
             margin-top: 50px;
 
         }
@@ -29,17 +30,29 @@
         .card-body {
             display: flex;
             flex-direction: column;
-            background-color: black;
+            background-color:  #dbb;
         }
 
         a {
             margin-top: auto;
+
         }
 
         .card img {
-            height: 100px;
+            height: 150px;
             object-fit: cover;
         }
+        .card-body a{
+            text-align: center;
+            text-decoration: none;
+            font-weight: bolder;
+            color:darkred;
+        }
+        .card-body a:hover{
+            list-style: none;
+
+        }
+
     </style>
 
 </head>
@@ -48,6 +61,15 @@
     <h1>作業</h1>
     <div class="container">
         <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <img src="https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.0-9/92288682_4258137527545179_2537881366159163392_o.jpg?_nc_cat=102&_nc_sid=8024bb&_nc_ohc=MtkF-PsCUTYAX9wT_sp&_nc_ht=scontent.ftpe8-4.fna&oh=f10e26ab758b608776b7332e446f369d&oe=5EB14B67"
+                        alt="圖片說明" class="card-img-top">
+                    <div class="card-body">
+                        <a href="HTML/Apple_iPadTable_Ajax.html">Apple_iPadTable_Ajax</a>
+                    </div>
+                </div>
+            </div>
             <div class="col-3">
                 <div class="card">
                     <img src="https://scontent.ftpe8-3.fna.fbcdn.net/v/t1.0-9/92326514_4250209638337968_5382393865057599488_o.jpg?_nc_cat=107&_nc_sid=8024bb&_nc_ohc=dB9FoInGQicAX9XPhNd&_nc_ht=scontent.ftpe8-3.fna&oh=058aa32c206b970e4b07439e0820d051&oe=5EAEB671"
@@ -86,10 +108,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
             <div class="col-3">
                 <div class="card">
                     <img src="https://scontent.ftpe8-3.fna.fbcdn.net/v/t1.0-9/92265997_4250240815001517_5870139903198625792_o.jpg?_nc_cat=111&_nc_sid=8024bb&_nc_ohc=v_O9GB0J-e8AX8nHtuq&_nc_ht=scontent.ftpe8-3.fna&oh=56de4041deb318eaf99340171821f68e&oe=5EB0AD7A"
@@ -128,10 +146,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
             <div class="col-3">
                 <div class="card">
                     <img src="https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.0-9/92687359_4250251765000422_3319887351894769664_n.jpg?_nc_cat=110&_nc_sid=8024bb&_nc_ohc=8_T9sI_8UaIAX_4wsZY&_nc_ht=scontent.ftpe8-4.fna&oh=7ca3755b5698e175cce8753f345f32c8&oe=5EAEADE8"
@@ -141,17 +155,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="https://scontent.ftpe8-4.fna.fbcdn.net/v/t1.0-9/92288682_4258137527545179_2537881366159163392_o.jpg?_nc_cat=102&_nc_sid=8024bb&_nc_ohc=MtkF-PsCUTYAX9wT_sp&_nc_ht=scontent.ftpe8-4.fna&oh=f10e26ab758b608776b7332e446f369d&oe=5EB14B67"
-                        alt="圖片說明" class="card-img-top">
-                    <div class="card-body">
-                        <a href="HTML/Apple_iPadTable_Ajax.html">Apple_iPadTable_Ajax</a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
