@@ -1,98 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 40px;
+        }
+
+        table {
+            width: 100%;
+            border: 1px solid #000;
+            margin: auto;
+        }
+
+        th {
+            text-align: center;
+            cursor: default;
+            background-color: #000;
+            color: #ddd;
+        }
+
+        th:hover {
+            cursor: default;
+            background-color: #ddd;
+            color: #000;
+        }
+
+        tr:nth-child(even) {
+            background-color: #000;
+            color: #ddd;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #444;
+            color: #ddd;
+
+        }
+
+        tr,
+        th,
+        td {
+            padding: 0;
+            font-size: 30px;
+        }
+    </style>
 </head>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-    h1{
-        text-align: center;
-        font-size: 40px;
-    }
-    table {width: 100%;
-        border: 1px solid #000;
-        margin: auto;
-    }
-    th{
-        cursor: default;
-        background-color: #000;
-        color: #ddd;
-    }
-    th:hover{
-        cursor: default;
-        background-color:#ddd ;
-        color: #000;
-    }
-
-    tr:nth-child(even) {
-        background-color: #000;
-        color: #ddd;
-    }
-    tr:nth-child(odd) {
-        background-color: #444;
-        color: #ddd;
-
-    }
-
-    tr,
-    th,
-    td {
-        padding: 0;
-        border: 1px solid #000;
-        font-size: 30px;
-    }
-
-    img {
-        width: 100px;
-    }
-</style>
 
 <body>
-
     <h1>Apple iPad</h1>
 
-
-    <!-- <div id="msg"></div> -->
-
-
     <script>
-        // console.log(Object.keys(employees[0]))
-        // console.log(Object.values(employees[0]))
-        // let ipad_expensive=ipads.filter(item=>item.price>15000)
         var ipad = "";
         var ipad1 = "";
+        var isDesc = false;
 
         window.onload = function () {
 
             let xhr = new XMLHttpRequest;
             xhr.onload = function () {
-                // document.getElementById("msg").innerHTML = this.responseText;
                 ipad = JSON.parse(this.responseText);
-                ipad1=ipad.products
-                console.log(ipad)
-                console.log(ipad1)
-                console.log(ipad1[0])
-
-
+                ipad1 = ipad.products
                 addthead();
                 addbody();
-                // var th_sku = document.getElementsByTagName("th")[1]
-                // var th_price = document.getElementsByTagName("th")[2]
-                // th_sku.onclick = thsort;
-                // th_price.onclick = priceonclick;
-                var the= document.getElementsByTagName("th")
-                console.log(the)
+                var the = document.getElementsByTagName("th")
                 for (let item of the) {
-                    // th[i].attachEvent("onclick",_clicki);
-                    item.onclick = function() {
-                        // alert(1111);
+                    item.onclick = function () {
                         _thsort(item);
                     }
                 }
@@ -100,15 +83,44 @@
             xhr.open("GET", "https://bs-frontend.azurewebsites.net/api/Apple/IPad");
             xhr.send();
         }
-        function _thsort(btn){
+
+        function _thsort(btn) {
+            var the = document.getElementsByTagName("th")
+            for (let item of the) {
+                item.firstElementChild.classList.remove('fa-sort-down');
+                item.firstElementChild.classList.remove('fa-sort-up');
+                item.firstElementChild.classList.remove('fa-sort');
+                item.firstElementChild.classList.add('fa-sort');
+            }
+
+            console.log(isDesc)
             // alert(1111);
             var type = btn.innerHTML;
             var tbody = document.getElementsByTagName('tbody')[0];
             tbody.remove(true);
-             ipad1.sort(function (a, b) {
-                return a[type] > b[type] ? 1 : -1;
-            });
+            if (!isDesc) {
+                ipad1.sort(function (a, b) {
+                    return a[type] > b[type] ? 1 : -1;
+                });
+            } else {
+                ipad1.sort(function (a, b) {
+                    return a[type] < b[type] ? 1 : -1;
+                });
+            }
             addbody();
+            if (!isDesc) {
+                isDesc = true
+                btn.firstElementChild.classList.remove('fa-sort');
+                btn.firstElementChild.classList.remove('fa-sort-down');
+                btn.firstElementChild.classList.add('fa-sort-up');
+            } else {
+                isDesc = false
+                btn.firstElementChild.classList.remove('fa-sort');
+                btn.firstElementChild.classList.remove('fa-sort-up');
+                btn.firstElementChild.classList.add('fa-sort-down');
+            }
+
+
         }
 
 
@@ -121,8 +133,8 @@
             for (var prop in ipad1[0]) {
                 var th = document.createElement('th');
                 thead.appendChild(th);
-                console.log(prop)
-                th.innerHTML = prop;
+                th.innerHTML = prop + `<i class="fas fa-sort"></i>`;
+
             }
 
         }
@@ -145,7 +157,17 @@
         }
     </script>
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
-
