@@ -51,6 +51,7 @@
         tr,
         th,
         td {
+            border: 1px solid #ddd;
             padding: 0;
             font-size: 30px;
         }
@@ -100,7 +101,6 @@
             tbody.remove(true);
             
             if (!isDesc) {
-                
                 ipad1.sort(function (a, b) {
                     return a[type] > b[type] ? 1 : -1;
                 });
@@ -114,13 +114,13 @@
             }
             
             addbody();
-            if (!isDesc) {
-                isDesc = true
+            if (isDesc) {
+                isDesc = false
                 btn.firstElementChild.classList.remove('fa-sort');
                 btn.firstElementChild.classList.remove('fa-sort-down');
                 btn.firstElementChild.classList.add('fa-sort-up');
             } else {
-                isDesc = false
+                isDesc = true
                 btn.firstElementChild.classList.remove('fa-sort');
                 btn.firstElementChild.classList.remove('fa-sort-up');
                 btn.firstElementChild.classList.add('fa-sort-down');
