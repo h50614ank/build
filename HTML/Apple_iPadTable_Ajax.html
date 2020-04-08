@@ -53,7 +53,16 @@
         td {
             border: 1px solid #ddd;
             padding: 0;
-            font-size: 30px;
+            font-size: 25px;
+        }
+        .picture{
+            text-align: center;
+            width: 120px;
+
+
+        }
+        img{
+            width: 50px;
         }
     </style>
 </head>
@@ -101,6 +110,7 @@
             tbody.remove(true);
             
             if (!isDesc) {
+
                 ipad1.sort(function (a, b) {
                     return a[type] > b[type] ? 1 : -1;
                 });
@@ -150,7 +160,6 @@
             let table = document.getElementsByTagName('table')[0];
             var tbody = document.createElement('tbody');
             table.appendChild(tbody);
-
             for (let i = 0; i < ipad1.length; i++) {
                 var tr = document.createElement('tr');
                 tbody.appendChild(tr);
@@ -158,8 +167,16 @@
                     var td = document.createElement('td');
                     tr.appendChild(td);
                     td.innerHTML = ipad1[i][prop];
+                    td.setAttribute('class',prop)
+                    
                 }
-
+            }
+            let pic=document.getElementsByClassName("picture")
+            for (let i = 0; i < ipad1.length; i++) {
+                let ppic=pic[i].innerHTML
+                pic[i].innerHTML=""
+                console.log(ppic)
+                pic[i].innerHTML=`<img src="${ppic}">`
             }
         }
     </script>
