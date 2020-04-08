@@ -67,12 +67,20 @@
         // console.log(Object.values(employees[0]))
         // let ipad_expensive=ipads.filter(item=>item.price>15000)
         var ipad = "";
+        var ipad1 = "";
+
         window.onload = function () {
 
             let xhr = new XMLHttpRequest;
             xhr.onload = function () {
                 // document.getElementById("msg").innerHTML = this.responseText;
                 ipad = JSON.parse(this.responseText);
+                ipad1=ipad.products
+                console.log(ipad)
+                console.log(ipad1)
+                console.log(ipad1[0])
+
+
                 addthead();
                 addbody();
                 // var th_sku = document.getElementsByTagName("th")[1]
@@ -89,7 +97,7 @@
                     }
                 }
             }
-            xhr.open("GET", "http://127.0.0.1:5501/AjaxExamplesLite/Examples/Apple/iPad.json");
+            xhr.open("GET", "https://bs-frontend.azurewebsites.net/api/Apple/IPad");
             xhr.send();
         }
         function _thsort(btn){
@@ -103,38 +111,6 @@
             addbody();
         }
 
-        // function skuonclick(btn) {
-        //     var type = btn.id
-        //     var tbody = document.getElementsByTagName('tbody')[0];
-        //     tbody.remove(true);
-        //     ipad = ipad.sort(function (a, b) {
-        //         return a[type] > b[type] ? 1 : -1;
-        //     });
-        //     addbody();
-        // }
-
-
-        function priceonclick() {
-            var tbody = document.getElementsByTagName('tbody')[0];
-            tbody.remove(true);
-            let xhr = new XMLHttpRequest;
-            xhr.onload = function () {
-                ipad = JSON.parse(this.responseText);
-                console.log(ipad)
-                pricesortup();
-                addbody();
-            }
-            xhr.open("GET", "http://127.0.0.1:5500/HTML/iPad.json");
-            xhr.send();
-        }
-
-        function pricesortup() {
-            ipad = ipad.sort(function (a, b) {
-                return a.price > b.price ? 1 : -1;
-            });
-        }
-
-
 
         function addthead() {
 
@@ -142,9 +118,10 @@
             document.body.appendChild(table);
             var thead = document.createElement('thead');
             table.appendChild(thead);
-            for (var prop in ipad[0]) {
+            for (var prop in ipad1[0]) {
                 var th = document.createElement('th');
                 thead.appendChild(th);
+                console.log(prop)
                 th.innerHTML = prop;
             }
 
@@ -155,13 +132,13 @@
             var tbody = document.createElement('tbody');
             table.appendChild(tbody);
 
-            for (let i = 0; i < ipad.length; i++) {
+            for (let i = 0; i < ipad1.length; i++) {
                 var tr = document.createElement('tr');
                 tbody.appendChild(tr);
-                for (let prop in ipad[i]) {
+                for (let prop in ipad1[i]) {
                     var td = document.createElement('td');
                     tr.appendChild(td);
-                    td.innerHTML = ipad[i][prop];
+                    td.innerHTML = ipad1[i][prop];
                 }
 
             }
