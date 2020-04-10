@@ -187,23 +187,50 @@
             //     map: map,
             // });
             if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                var marker = new google.maps.Marker({
-                    position: pos,
-                    label:"我的位置",
-                    map: map
-                });
-                map.setZoom(17);
-                map.setCenter(pos);
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            alert("未允許或遭遇錯誤！");
-        }
+
+                // 使用者不提供權限，或是發生其它錯誤
+                function error() {
+                    alert('無法取得你的位置');
+                }
+
+                // 使用者允許抓目前位置，回傳經緯度
+                function success(position) {
+                    console.log(position.coords.latitude, position.coords.longitude);
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var marker = new google.maps.Marker({
+                        position: pos,
+                        label: "我的位置",
+                        map: map
+                    });
+                }
+
+                // 跟使用者拿所在位置的權限
+                navigator.geolocation.getCurrentPosition(success, error);
+
+            } else {
+                alert('Sorry, 你的裝置不支援地理位置功能。')
+            }
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(function (position) {
+            //         var pos = {
+            //             lat: position.coords.latitude,
+            //             lng: position.coords.longitude
+            //         };
+            //         var marker = new google.maps.Marker({
+            //             position: pos,
+            //             label: "我的位置",
+            //             map: map
+            //         });
+            //         map.setZoom(17);
+            //         map.setCenter(pos);
+            //     });
+            // } else {
+            //     // Browser doesn't support Geolocation
+            //     alert("未允許或遭遇錯誤！");
+            // }
 
             $.ajax({
                 type: "Get",
@@ -290,7 +317,6 @@
                 }
             });
         }
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag &callback=initMap"
         async defer></script>
