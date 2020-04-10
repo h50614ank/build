@@ -109,12 +109,12 @@
                             mask: properties[i].pro
                         })
                     }
-                    console.log(total[0].mask.name)
-                    console.log(total.length)
+                    // console.log(total[0].mask.name)
+                    // console.log(total.length)
                     let longitude = [];
                     let latitude = [];
                     for (let i = 0; i < total.length; i++) {
-                        console.log(typeof (total[i].mask.mask_adult))
+                        // console.log(typeof (total[i].mask.mask_adult))
                         longitude[i] = total[i].storeaddress[1];
                         latitude[i] = total[i].storeaddress[0];
                         let havenot = total[i].mask.mask_adult
@@ -149,20 +149,15 @@
                         +'<p> 兒童口罩數量 : '+total[i].mask.mask_child+'</p>'
                         +'<p>'+total[i].mask.custom_note+'</p>'+'</div>'
                         markers.addListener('click', function () {
-                            a = a * -1;
-                            if (a > 0) {
                                 var infowindow = new google.maps.InfoWindow({
                                     content: contentString,
                                     position: {
                                         lat: longitude[i],
                                         lng: latitude[i]
-                                    }
+                                    },
+                                    maxWidth:250
                                 });
                                 infowindow.open(map, markers);
-                            } else {
-                                infowindow.close();
-                            }
-
                         });
                     }
 
