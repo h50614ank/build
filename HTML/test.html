@@ -53,6 +53,7 @@
                 zoom: 16,
                 center: myLatLng
             });
+            
             if (navigator.geolocation) {
                 // 使用者不提供權限，或是發生其它錯誤
                 function error() {
@@ -60,16 +61,20 @@
                 }
                 // 使用者允許抓目前位置，回傳經緯度
                 function success(position) {
-                    console.log(position.coords.latitude, position.coords.longitude);
+                    // console.log(position.coords.latitude, position.coords.longitude);
                     var pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
+
+                    map.setCenter(pos);
                     var marker = new google.maps.Marker({
                         position: pos,
                         label: "我的位置",
                         map: map
                     });
+                   
+
                 }
                 // 跟使用者拿所在位置的權限
                 navigator.geolocation.getCurrentPosition(success, error);
@@ -77,6 +82,7 @@
             } else {
                 alert('Sorry, 你的裝置不支援地理位置功能。')
             }
+
             var geometry = []
             var properties = []
             var total = []
@@ -140,24 +146,24 @@
                             }
                         }
                         let a = -1;
-                        let contentString = 
-                        '<div>'+
-                        '<h4>' + total[i].mask.name + '</h4>'
-                        +'<p> 電話 : '+total[i].mask.phone+'</p>'
-                        +'<p> 地址 : '+total[i].mask.address+'</p>'
-                        +'<p> 成人口罩數量 : '+total[i].mask.mask_adult+'</p>'
-                        +'<p> 兒童口罩數量 : '+total[i].mask.mask_child+'</p>'
-                        +'<p>'+total[i].mask.custom_note+'</p>'+'</div>'
+                        let contentString =
+                            '<div>' +
+                            '<h4>' + total[i].mask.name + '</h4>' +
+                            '<p> 電話 : ' + total[i].mask.phone + '</p>' +
+                            '<p> 地址 : ' + total[i].mask.address + '</p>' +
+                            '<p> 成人口罩數量 : ' + total[i].mask.mask_adult + '</p>' +
+                            '<p> 兒童口罩數量 : ' + total[i].mask.mask_child + '</p>' +
+                            '<p>' + total[i].mask.custom_note + '</p>' + '</div>'
                         markers.addListener('click', function () {
-                                var infowindow = new google.maps.InfoWindow({
-                                    content: contentString,
-                                    position: {
-                                        lat: longitude[i],
-                                        lng: latitude[i]
-                                    },
-                                    maxWidth:250
-                                });
-                                infowindow.open(map, markers);
+                            var infowindow = new google.maps.InfoWindow({
+                                content: contentString,
+                                position: {
+                                    lat: longitude[i],
+                                    lng: latitude[i]
+                                },
+                                maxWidth: 250
+                            });
+                            infowindow.open(map, markers);
                         });
                     }
 
