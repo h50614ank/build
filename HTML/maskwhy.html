@@ -239,11 +239,13 @@
 
             // console.log(total)
             function _thsort(btn) {
-
                 var btn = btn.id;
                 var btncountry = []
                 var towndiv = document.getElementsByTagName('div')[1];
-                towndiv.innerHTML = ""
+                towndiv.innerHTML = " ";
+                // var townbtnv =towndiv.document.getElementsByTagName('btn');
+
+                // townbtnv.remove(true)
                 // console.log(btn)
                 for (let i = 0; i < country.length; i++) {
                     if (country[i].Country == btn) {
@@ -265,7 +267,6 @@
                     }
                 })
                 console.log(country22) //地區
-
                 for (let i = 0; i < country22.length; i++) {
                     if (country22[i].Country == btn) {
                         var townbtn = document.createElement('button')
