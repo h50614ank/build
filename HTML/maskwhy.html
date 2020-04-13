@@ -45,6 +45,8 @@
             width: 10%;
         }
         .btn{
+            font-size: 20px;
+            font-weight: bold;
             width: 20%;
             border-radius: 0%;
         }
@@ -118,7 +120,6 @@
             var total = []
             var storeaddress = []
             var country11 = []
-            var country22 = []
             var country = []
 
             window.onload = function () {
@@ -239,12 +240,12 @@
 
             // console.log(total)
             function _thsort(btn) {
+                var country22 = []
                 var btn = btn.id;
                 var btncountry = []
                 var towndiv = document.getElementsByTagName('div')[1];
                 towndiv.innerHTML = " ";
                 // var townbtnv =towndiv.document.getElementsByTagName('btn');
-
                 // townbtnv.remove(true)
                 // console.log(btn)
                 for (let i = 0; i < country.length; i++) {
