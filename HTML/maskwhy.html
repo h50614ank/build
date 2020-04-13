@@ -45,8 +45,6 @@
             width: 10%;
         }
         .btn{
-            font-size: 20px;
-            font-weight: bold;
             width: 20%;
             border-radius: 0%;
         }
@@ -120,6 +118,9 @@
             var total = []
             var storeaddress = []
             var country11 = []
+            var country22 = []
+            var country23 = []
+            
             var country = []
 
             window.onload = function () {
@@ -240,12 +241,14 @@
 
             // console.log(total)
             function _thsort(btn) {
-                var country22 = []
+            var country22 = []
+
                 var btn = btn.id;
                 var btncountry = []
                 var towndiv = document.getElementsByTagName('div')[1];
                 towndiv.innerHTML = " ";
                 // var townbtnv =towndiv.document.getElementsByTagName('btn');
+
                 // townbtnv.remove(true)
                 // console.log(btn)
                 for (let i = 0; i < country.length; i++) {
@@ -267,6 +270,7 @@
                         country22.push(item)
                     }
                 })
+                country23=country22
                 console.log(country22) //地區
                 for (let i = 0; i < country22.length; i++) {
                     if (country22[i].Country == btn) {
@@ -290,15 +294,16 @@
 
             function _townmap(tbtn) {
                 var tbtn = tbtn.id
-                for (let i = 0; i < country22.length; i++) {
-                    if (country22[i].Town == tbtn) {
-                        // console.log(country22[i].Storeaddress[1])
+                console.log(country23)
+                for (let i = 0; i < country23.length; i++) {
+                    if (country23[i].Town == tbtn) {
+                        // console.log(country23[i].Storeaddress[1])
                         var tpos = {
-                            lat: country22[i].Storeaddress[1],
-                            lng: country22[i].Storeaddress[0]
+                            lat: country23[i].Storeaddress[1],
+                            lng: country23[i].Storeaddress[0]
                         };
                         map.setCenter(tpos);
-
+                        map.setZoom(14)
                     }
                 }
             }
