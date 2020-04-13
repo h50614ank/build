@@ -26,6 +26,11 @@
 </head>
 
 <body>
+    <div class="countrybutton">
+        <!-- <div class="townbutton"></div> -->
+    </div>
+    <div class="townbutton"></div>
+
     <div id="map"></div>
     <script>
         function initMap() {
@@ -50,10 +55,10 @@
                         }]
                     }
                 ],
-                zoom: 16,
+                zoom: 15,
                 center: myLatLng
             });
-            
+
             if (navigator.geolocation) {
                 // 使用者不提供權限，或是發生其它錯誤
                 function error() {
@@ -66,15 +71,12 @@
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-
                     map.setCenter(pos);
                     var marker = new google.maps.Marker({
                         position: pos,
                         label: "我的位置",
                         map: map
                     });
-                   
-
                 }
                 // 跟使用者拿所在位置的權限
                 navigator.geolocation.getCurrentPosition(success, error);
@@ -87,11 +89,16 @@
             var properties = []
             var total = []
             var storeaddress = []
+            var country11 = []
+            var country22 = []
+            var country = []
+
             window.onload = function () {
                 let xhr = new XMLHttpRequest;
                 xhr.onload = function () {
                     _data = JSON.parse(this.responseText).features;
-                    console.log(_data)
+                    // console.log(_data)
+
                     _data.forEach((item, index) => {
                         let geo = item.geometry
                         // console.log(geo)
@@ -121,13 +128,13 @@
                     let latitude = [];
                     for (let i = 0; i < total.length; i++) {
                         // console.log(typeof (total[i].mask.mask_adult))
-                        longitude[i] = total[i].storeaddress[1];
-                        latitude[i] = total[i].storeaddress[0];
+                        latitude[i] = total[i].storeaddress[1];
+                        longitude[i] = total[i].storeaddress[0];
                         let havenot = total[i].mask.mask_adult
                         let markers = new google.maps.Marker({
                             position: {
-                                lat: longitude[i],
-                                lng: latitude[i]
+                                lat: latitude[i],
+                                lng: longitude[i]
                             },
                             map: map,
                             title: `${total[i].mask.name}`,
@@ -145,7 +152,7 @@
                                 scaledSize: new google.maps.Size(40, 40)
                             }
                         }
-                        let a = -1;
+                        var haveinfo = '';
                         let contentString =
                             '<div>' +
                             '<h4>' + total[i].mask.name + '</h4>' +
@@ -153,8 +160,13 @@
                             '<p> 地址 : ' + total[i].mask.address + '</p>' +
                             '<p> 成人口罩數量 : ' + total[i].mask.mask_adult + '</p>' +
                             '<p> 兒童口罩數量 : ' + total[i].mask.mask_child + '</p>' +
-                            '<p>' + total[i].mask.custom_note + '</p>' + '</div>'
+                            '<p>' + total[i].mask.custom_note + '</p>' + '</div>';
+
                         markers.addListener('click', function () {
+                            if (haveinfo != '') {
+                                haveinfo.close();
+                                haveinfo = '';
+                            }
                             var infowindow = new google.maps.InfoWindow({
                                 content: contentString,
                                 position: {
@@ -164,13 +176,124 @@
                                 maxWidth: 250
                             });
                             infowindow.open(map, markers);
+                            haveinfo = infowindow;
                         });
                     }
-
+                    for (let i = 0; i < total.length; i++) {
+                        country.push({
+                            Country: total[i].mask.county,
+                            Town: total[i].mask.town,
+                            Storeaddress: total[i].storeaddress
+                        })
+                    }
+                    // console.log(country)
+                    const set1 = new Set();
+                    const country1 = country.filter(item => !set1.has(item.Country) ? set1.add(item.Country) :
+                        false);
+                    country1.forEach((item, index) => {
+                        if (item.Country !== "") {
+                            country11.push(item)
+                        }
+                    })
+                    add()
+                    var btn = document.getElementsByTagName("button")
+                    for (let item of btn) {
+                        // console.log(item)
+                        item.onclick = function () {
+                            _thsort(item);
+                        }
+                    }
+                    // var townbtn = document.getElementsByClassName("townbtn")
+                    // console.log(townbtn)
+                    // for (let item of townbtn) {
+                    //     console.log(item)
+                    //     item.onclick = function () {
+                    //         _townmap(item);
+                    //     }
+                    // }
                 }
                 xhr.open("GET",
                     "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json");
                 xhr.send();
+            }
+
+            // console.log(total)
+            function _thsort(btn) {
+
+                var btn = btn.id;
+                var btncountry = []
+                var towndiv = document.getElementsByTagName('div')[1];
+                towndiv.innerHTML = ""
+                // console.log(btn)
+                for (let i = 0; i < country.length; i++) {
+                    if (country[i].Country == btn) {
+                        btncountry.push({
+                            Country: country[i].Country,
+                            Town: country[i].Town,
+                            Storeaddress: country[i].Storeaddress
+                        })
+                    }
+                }
+                // console.log(btncountry)
+                const set2 = new Set();
+                const country2 = btncountry.filter(item => !(set2.has(item.Town)) ? set2.add(item.Town) :
+                    false);
+                console.log(country2);
+                country2.forEach((item, index) => {
+                    if (item.Country !== "") {
+                        country22.push(item)
+                    }
+                })
+                console.log(country22) //地區
+
+                for (let i = 0; i < country22.length; i++) {
+                    if (country22[i].Country == btn) {
+                        var townbtn = document.createElement('button')
+                        townbtn.innerHTML = country22[i].Town
+                        towndiv.appendChild(townbtn)
+                        townbtn.setAttribute('id', country22[i].Town)
+                        townbtn.setAttribute('class', "townbtn")
+                    }
+                }
+                var townbtn = document.getElementsByClassName("townbtn")
+                console.log(townbtn)
+                for (let item of townbtn) {
+                    console.log(item)
+                    item.onclick = function () {
+                        _townmap(item);
+                    }
+                }
+
+            }
+
+            function _townmap(tbtn) {
+                var tbtn = tbtn.id
+                for (let i = 0; i < country22.length; i++) {
+                    if (country22[i].Town == tbtn) {
+                        // console.log(country22[i].Storeaddress[1])
+                        var tpos = {
+                            lat: country22[i].Storeaddress[1],
+                            lng: country22[i].Storeaddress[0]
+                        };
+                        map.setCenter(tpos);
+
+                    }
+                }
+            }
+
+
+            function add() {
+                // console.log(country11); //縣市
+                // console.log(country11.length); //縣市
+                // console.log(country11[1].Country); //縣市
+                var addcountry = document.getElementsByTagName('div')[0]
+                for (let i = 0; i < country11.length; i++) {
+                    let cbutton = document.createElement('button')
+                    cbutton.innerHTML = country11[i].Country;
+                    addcountry.appendChild(cbutton);
+                    cbutton.setAttribute('id', country11[i].Country)
+                }
+
             }
 
         }

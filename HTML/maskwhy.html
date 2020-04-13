@@ -28,295 +28,210 @@
 <body>
     <div id="map"></div>
     <script>
-        function initMap() {
+        var map;
+        var maskPosJson;
+        var displayCountry = [];
+        var countries = [];
+        var closeCountryFlag = true;
+        var aliveInfoWindow = '';
 
-            var myLatLng = {
-                lat: 24.7571306,
-                lng: 120.9522639
-            };
+        MapAndDataInit();
 
-            var map = new google.maps.Map(document.getElementById('map'), {
-                styles: [{
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#212121"
-                        }]
-                    },
-                    {
-                        "elementType": "labels.icon",
-                        "stylers": [{
-                            "visibility": "off"
-                        }]
-                    },
-                    {
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#757575"
-                        }]
-                    },
-                    {
-                        "elementType": "labels.text.stroke",
-                        "stylers": [{
-                            "color": "#212121"
-                        }]
-                    },
-                    {
-                        "featureType": "administrative",
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#757575"
-                        }]
-                    },
-                    {
-                        "featureType": "administrative.country",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#9e9e9e"
-                        }]
-                    },
-                    {
-                        "featureType": "administrative.land_parcel",
-                        "stylers": [{
-                            "visibility": "off"
-                        }]
-                    },
-                    {
-                        "featureType": "administrative.locality",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#bdbdbd"
-                        }]
-                    },
-                    {
-                        "featureType": "poi",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#757575"
-                        }]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#181818"
-                        }]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#616161"
-                        }]
-                    },
-                    {
-                        "featureType": "poi.park",
-                        "elementType": "labels.text.stroke",
-                        "stylers": [{
-                            "color": "#1b1b1b"
-                        }]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "geometry.fill",
-                        "stylers": [{
-                            "color": "#2c2c2c"
-                        }]
-                    },
-                    {
-                        "featureType": "road",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#8a8a8a"
-                        }]
-                    },
-                    {
-                        "featureType": "road.arterial",
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#373737"
-                        }]
-                    },
-                    {
-                        "featureType": "road.highway",
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#3c3c3c"
-                        }]
-                    },
-                    {
-                        "featureType": "road.highway.controlled_access",
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#4e4e4e"
-                        }]
-                    },
-                    {
-                        "featureType": "road.local",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#616161"
-                        }]
-                    },
-                    {
-                        "featureType": "transit",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#757575"
-                        }]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "geometry",
-                        "stylers": [{
-                            "color": "#000000"
-                        }]
-                    },
-                    {
-                        "featureType": "water",
-                        "elementType": "labels.text.fill",
-                        "stylers": [{
-                            "color": "#3d3d3d"
-                        }]
-                    }
-                ],
-                zoom: 16,
-                center: myLatLng
-            });
-            // var marker = new google.maps.Marker({
-            //     position: myLatLng,
-            //     map: map,
-            // });
-            if (navigator.geolocation) {
+        function MapAndDataInit() {
 
-                // 使用者不提供權限，或是發生其它錯誤
-                function error() {
-                    alert('無法取得你的位置');
+            // let url = "NewMaskData.json";
+            let url = "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json";
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    maskPosJson = JSON.parse(this.responseText).features;
+                    dataFeed_callback(maskPosJson);
+                } else {
+                    console.log('load error');
+                }
+            }
+            xhr.open("GET", url);
+            xhr.send();
+        };
+
+        function dataFeed_callback(positionInfoData) {
+            positionInfoData.forEach(everyPos => {
+                let latLng = new google.maps.LatLng(everyPos.geometry.coordinates[1], everyPos.geometry.coordinates[0]);
+
+                let iconAvalibel = 'http://maps.google.com/mapfiles/kml/paddle/grn-stars.png';
+                let iconNoStock = 'http://maps.google.com/mapfiles/kml/paddle/red-square.png';
+
+                let marker = new google.maps.Marker({
+                    position: latLng,
+                    icon: '',
+                    map: map
+                });
+                if (everyPos.properties.mask_adult === 0) {
+                    marker.icon = iconNoStock;
+                } else {
+                    marker.icon = iconAvalibel;
                 }
 
-                // 使用者允許抓目前位置，回傳經緯度
-                function success(position) {
-                    console.log(position.coords.latitude, position.coords.longitude);
+                let contentString =
+                    '<div>' +
+                    '<h5>店家名稱 : ' + everyPos.properties.name + '</h5>' +
+                    '<p>地址 : ' + everyPos.properties.address + '</p>' +
+                    '<p>電話 : ' + everyPos.properties.phone + '</p>' +
+                    '<p>成人口罩數量 : ' + everyPos.properties.mask_adult + '</p>' +
+                    '<p>兒童口罩數量 : ' + everyPos.properties.mask_child + '</p>';
+
+                contentString += GetAvalibleTable(everyPos.properties.available);
+
+                contentString +=
+                    '<p>備註 : ' + everyPos.properties.note + '</p>' +
+                    '<p>最後更新時間 : ' + everyPos.properties.updated + '</p>' +
+                    '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+                marker.addListener('click', function () {
+                    if (aliveInfoWindow != '') {
+                        aliveInfoWindow.close();
+                        aliveInfoWindow = '';
+                    }
+                    var infoWindow = new google.maps.InfoWindow({ content: contentString });
+                    infowindow.open(map, marker);
+                    aliveInfoWindow = infowindow;
+                });
+
+
+                CollectCountries(everyPos.properties);
+            });
+        };
+
+        function GetAvalibleTable(rowText) {
+            let resultTable = '';
+            let startText = '<table><tbody><tr><th>星期一</th><th>星期二</th><th>星期三</th><th>星期四</th><th>星期五</th><th>星期六</th><th>星期日</th></tr>';
+            let endText = '<tbody><table>';
+
+            let availableTextArr = rowText.split('、').map(x => x.substring(5));
+
+            resultTable += startText;
+            for (let trIndex = 0; trIndex < 3; trIndex++) {
+                resultTable += '<tr>';
+                for (let tdIndex = 0; tdIndex < 7; tdIndex++) {
+                    resultTable += '<td>';
+                    if (availableTextArr[trIndex * tdIndex] == undefined || availableTextArr[trIndex * tdIndex] =='') {
+                        resultTable += ' - ';
+                    }else{
+                        resultTable += availableTextArr[trIndex * tdIndex];
+                    };
+                    resultTable += '</td>';
+                };
+                resultTable += '</tr>';
+            };
+            resultTable += endText;
+
+            return resultTable;
+        };
+
+        function CollectCountries(inputCountry) {
+            let inputCountryName = inputCountry.county;
+            let countryIndex = displayCountry.indexOf(inputCountryName);
+            if (countryIndex == -1 && inputCountryName != '') {
+                displayCountry.push(inputCountryName);
+
+                countries.push({ countryName: inputCountryName, towns: [] });
+
+                let newLi = document.createElement('li');
+                newLi.textContent = inputCountryName;
+                newLi.className = 'list-group-item';
+                newLi.addEventListener('click', EventClickExpandCountry);
+                document.getElementById('countryList').appendChild(newLi);
+            };
+
+            if (countryIndex != -1) {
+                if (countries[countryIndex].towns.indexOf(inputCountry.town) == -1) {
+                    countries[countryIndex].towns.push(inputCountry.town);
+                }
+            }
+        };
+
+        function EventClickExpandCountry() {
+            let countryIndex = displayCountry.indexOf(this.innerText);
+            ClearExistTown(this);
+            ImportTowns(this, countryIndex);
+            let test = document.createElement('li');
+            this.removeEventListener('click', EventClickExpandCountry);
+        };
+
+        function ImportTowns(countryNode, countryIndex) {
+            countries[countryIndex].towns.forEach(eachTown => {
+                let liTown = document.createElement('li');
+                liTown.innerText = eachTown;
+                liTown.className = 'list-group-item list-town';
+                liTown.addEventListener('click', EventClickTown);
+                countryNode.insertBefore(liTown, null);
+            });
+            countryNode.addEventListener('click', EventCloseCurrent);
+        };
+
+        function EventCloseCurrent() {
+            if (closeCountryFlag) {
+                ClearExistTown(this);
+            } else {
+                closeCountryFlag = true;
+            }
+        }
+
+        function EventClickTown() {
+            closeCountryFlag = false;
+            for (let index = 0; index < maskPosJson.length; index++) {
+                const element = maskPosJson[index];
+                if (maskPosJson[index].properties.town == this.innerText &&
+                    maskPosJson[index].properties.county == this.parentNode.childNodes[0].data) {
+                    let lat = maskPosJson[index].geometry.coordinates[1];
+                    let lng = maskPosJson[index].geometry.coordinates[0];
+                    map.setCenter({
+                        lat: lat,
+                        lng: lng
+                    });
+                    break;
+                }
+            }
+        }
+
+        function ClearExistTown(imputCountryNode) {
+            let countryNodes = imputCountryNode.parentNode.querySelectorAll('.list-town');
+            if (countryNodes.length != 0) {
+                countryNodes[0].parentNode.addEventListener('click', EventClickExpandCountry);
+            }
+            countryNodes.forEach(eachNode => {
+                eachNode.remove();
+            })
+        };
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 25.0443278, lng: 121.5416321 },
+                zoom: 15
+            });
+            infoWindow = new google.maps.InfoWindow;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    var marker = new google.maps.Marker({
-                        position: pos,
-                        label: "我的位置",
-                        map: map
-                    });
-                }
-
-                // 跟使用者拿所在位置的權限
-                navigator.geolocation.getCurrentPosition(success, error);
-
+                    // alert(pos.lat + ' ' + pos.lng);
+                    // infoWindow.setPosition(pos);
+                    // infoWindow.setContent('Location found.');
+                    // infoWindow.open(map);
+                    map.setCenter(pos);
+                }, function () {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
             } else {
-                alert('Sorry, 你的裝置不支援地理位置功能。')
+                handleLocationError(false, infoWindow, map.getCenter());
             }
-            // if (navigator.geolocation) {
-            //     navigator.geolocation.getCurrentPosition(function (position) {
-            //         var pos = {
-            //             lat: position.coords.latitude,
-            //             lng: position.coords.longitude
-            //         };
-            //         var marker = new google.maps.Marker({
-            //             position: pos,
-            //             label: "我的位置",
-            //             map: map
-            //         });
-            //         map.setZoom(17);
-            //         map.setCenter(pos);
-            //     });
-            // } else {
-            //     // Browser doesn't support Geolocation
-            //     alert("未允許或遭遇錯誤！");
-            // }
+        };
 
-            $.ajax({
-                type: "Get",
-                url: "https://findmasks.herokuapp.com/places",
-                success: function (response) {
-                    var geometry = [];
-                    var properties = [];
-                    var storeaddress = [];
-                    var mask = [];
-                    var total = [];
-                    let fea = response.features
-                    fea.forEach((item, index) => {
-                        let geo = item.geometry
-                        let pro = item.properties
-                        geometry.push({
-                            geo
-                        })
-                        properties.push({
-                            pro
-                        })
-                    });
-                    for (let i = 0; i < properties.length; i++) {
-                        let g = geometry[i]
-                        for (let item in g) {
-                            storeaddress.push(g[item].coordinates)
-                        }
-                        let p = properties[i]
-                        for (let j in p) {
-                            mask.push({
-                                name: p[j].name,
-                                masksLeft: p[j].masksLeft
-                            })
-                        }
-                        total.push({
-                            storeaddress: storeaddress[i],
-                            mask: mask[i]
-                        })
-                    }
-                    console.log(storeaddress)
-                    console.log(total)
-                    let longitude = [];
-                    let latitude = [];
-                    for (let i = 0; i < total.length; i++) {
-                        console.log(typeof (total[i].mask.masksLeft))
-                        longitude[i] = total[i].storeaddress[1];
-                        latitude[i] = total[i].storeaddress[0];
-                        let havenot = total[i].mask.masksLeft
-                        //
-                        if (havenot == 0) {
-                            markers = new google.maps.Marker({
-
-                                position: {
-                                    lat: longitude[i],
-                                    lng: latitude[i]
-                                },
-                                map: map,
-                                title: `${total[i].mask.masksLeft}`,
-                                icon: {
-                                    url: "masknn.png",
-                                    scaledSize: new google.maps.Size(40, 40)
-                                }
-                            })
-                        } else {
-
-                            markers = new google.maps.Marker({
-
-                                position: {
-                                    lat: longitude[i],
-                                    lng: latitude[i]
-                                },
-                                map: map,
-                                title: `${total[i].mask.masksLeft}`,
-
-                                icon: {
-                                    url: "mask.png",
-                                    scaledSize: new google.maps.Size(40, 40)
-                                }
-                            })
-
-                        }
-
-                    }
-
-                }
-            });
-        }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag &callback=initMap"
         async defer></script>
