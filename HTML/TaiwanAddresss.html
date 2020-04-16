@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>TaiwanAddress</title>
+    <style>
+        h1{text-align: center;}
+        .table{text-align: center;}
+        table{
+            margin: auto;
+            border: #ddd 1px solid;
+        }
+        thead{
+            background-color: #444;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TaiwanAddress</h1>
+    <div class="table">
+        <table>
+            <thead>
+                <th>城市</th>
+                <th>區域</th>
+                <th>郵遞區號</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <template id="templaterow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+    <script>
+        function fetchMaskJson(url) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data)
+                    addrow(data)
+                })
+            // .catch(ex => {
+            //     $g("body").innerHTML = ex;
+            // })
+        }
+        window.onload = fetchMaskJson(
+            "https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/AllData.json"
+        )
+
+        function addrow(data) {
+            // console.log(data[0].districts)
+            let Zipcode = []
+            data.forEach((item, index) => {
+                // console.log(item.CityName, item.AreaList)
+                let area = []
+                item.AreaList.forEach((j, ii) => {
+                    // console.log(j.ZipCode)
+                    area.push({
+                        District: j.AreaName,
+                        ZipCode: j.ZipCode
+                    })
+                })
+                Zipcode.push({
+                    CityNames: item.CityName,
+                    Districts: area
+                })
+            });
+            console.log(Zipcode[0])
+            var tbody = document.getElementsByTagName("tbody")[0]
+            let templaterow = document.getElementById('templaterow');
+
+            for (let i = 0; i < Zipcode.length; i++) {
+                let city = Zipcode[i].CityNames
+                Zipcode[i].Districts.forEach((item, index) => {
+                    var cloneContent = templaterow.content.cloneNode(true);
+                    var td = cloneContent.querySelectorAll('td');
+                    td[0].innerHTML = city
+                    td[1].innerHTML = item.District
+                    td[2].innerHTML = item.ZipCode
+                    tbody.appendChild(cloneContent)
+                })
+                // tbody.appendChild(cloneContent)
+
+            }
+
+
+
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
