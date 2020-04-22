@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>寶可夢圖鑑列表</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        .control {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="control">
+        <h1>寶可夢圖鑑列表</h1>
+    <button class="btn btn-dark"  id='addone' onclick="AddPokemon()">增加一個</button>
+    <button class="btn btn-dark"  id='removeone' onclick="removePokemon()">減少一個</button>
+    <button class="btn btn-dark"  id='loadall' onclick="allPokemon()">觀看全部</button>
+    <button class="btn btn-dark"  id='loadall' onclick="clearPokemon()">清除</button>
+    <div id='container'>
+
+    </div>
+</div>
+    
+    <script>
+        // var container = document.getElementById('container');
+        //window載入時,執行appendPokemon()方法,新增一張圖片
+        window.onload = appendPokemon();
+
+        function appendPokemon() {
+            //creat <img> element
+            let img = document.createElement('img');
+            //seet img's src=''
+            // $('img').attr('src', 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png');
+            img.setAttribute('src', 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png');
+            //add <img> into <div>
+            $('#container').append(img);
+            // container.appendChild(img);
+        }
+        var index = 2;
+
+        function AddPokemon() {
+            //creat <img> element
+            let img = document.createElement('img');
+            let fileName = index.toString().padStart(3, '0');;
+            //seet img's src=''
+            img.setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`);
+            //add <img> into <div>
+            container.appendChild(img);
+            index++;
+        }
+
+        function removePokemon() {
+            var len = container.childNodes.length;
+            if (len > 0) {
+                container.removeChild(container.childNodes[len - 1]);
+                index > 1 ? index-- : index;
+            }
+        }
+
+        function allPokemon() {
+            $('#container').html(null);
+            for (let i = 1; i < 890; i++) {
+                let fileName = i.toString().padStart(3, '0');
+                let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
+                //建立<img src=''>元素
+                let img = document.createElement('img');
+                img.setAttribute('src', pathFile);
+                //加入DOM元素
+                container.appendChild(img);
+            }
+        }
+
+        function clearPokemon() {
+            $('#container').html(null);
+            index = 1;
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
