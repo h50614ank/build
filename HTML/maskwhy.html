@@ -25,7 +25,8 @@
             margin: 0;
             padding: 0;
         }
-        h1{
+
+        h1 {
             text-align: center;
             font-weight: bold;
             background-color: #333;
@@ -34,52 +35,87 @@
             height: 50px;
             line-height: 50px;
         }
-        .countrybutton{
+
+        .countrybutton {
             width: 100%;
             border-bottom: 1px solid black;
         }
-        .countrybutton .btn{
+
+        .countrybutton .btn {
             /* border:1px solid black ; */
             border-top: 0;
             border-left: 0;
         }
-        .townbutton .btn{
+
+        .townbutton .btn {
             width: 10%;
             border-top: 0;
             border-left: 0;
         }
-        .btn{
+
+        .btn {
             font-size: 20px;
             font-weight: bold;
             width: 10%;
             border-radius: 0%;
         }
-        .mask{
-            display: flex;
+
+        .mask {
+            /* display: flex; */
             background-color: #333;
             /* height: 100%; */
             padding: 0;
             margin: 0;
             /* width: 100%; */
         }
-        .mask .col-4{
-            display: flex;
-            padding: 0;
-        }
-        .mask .col-4:nth-child(3){
-            padding-right: 5%;
-        }.mask .col-4:nth-child(1){
-            padding-left: 5%;
-        }
-        .mask .col-4 img{
+
+        @media screen and (min-width: 1025px) {
+            .mask {
+                display: flex;
+                background-color: #333;
+                /* height: 100%; */
+                padding: 0;
+                margin: 0;
+                /* width: 100%; */
+            }
+
+            .mask .col-xl-4:nth-child(3) {
+                padding-right: 5%;
+            }
+
+            .mask .col-xl-4:nth-child(1) {
+                padding-left: 5%;
+            }
+
+            .mask .col-xl-4 p {
+                /* margin-left: auto; */
+                font-size: 22px;
+                margin: 0;
+                font-weight: bold;
+                line-height: 50px;
+            }
+            .mask .col-xl-4 img {
             /* margin: auto; */
             margin-left: 32%;
         }
-        .mask .col-4 p{
-            /* margin-left: auto; */
+        }
+        /* @media screen and (max-width: 767px){
+            .col-12{
+                margin-left: 0;
+            }
+        } */
 
+        .mask .col-xl-4 {
+            display: flex;
+            padding: 0;
+        }
+
+
+
+        .mask .col-xl-4 p {
+            /* margin-left: auto; */
             color: #fff;
-            font-size: 22px;
+            /* font-size: 22px; */
             margin: 0;
             font-weight: bold;
             line-height: 50px;
@@ -95,12 +131,15 @@
     </div>
     <div class="townbutton"></div>
     <div class="mask">
-        <div class="col-4"><img src="mask.png" alt="">
-        <p>還超過一百片口罩</p></div>
-        <div class="col-4"><img src="lmask.png" alt="">
-        <p>口罩快沒了</p></div>
-        <div class="col-4"><img src="notmask.png" alt="">
-        <p>口罩已經沒了</p></div>
+        <div class="col-xl-4"><img src="mask.png" alt="">
+            <p>還超過一百片口罩</p>
+        </div>
+        <div class="col-xl-4"><img src="lmask.png" alt="">
+            <p>口罩快沒了</p>
+        </div>
+        <div class="col-xl-4"><img src="notmask.png" alt="">
+            <p>口罩已經沒了</p>
+        </div>
     </div>
 
     <div id="map"></div>
@@ -152,9 +191,9 @@
                         // animation: google.maps.Animation.DROP,
                         animation: google.maps.Animation.BOUNCE,
                         icon: {
-                                url: "22222.png",
-                                scaledSize: new google.maps.Size(50, 50)
-                            }
+                            url: "22222.png",
+                            scaledSize: new google.maps.Size(50, 50)
+                        }
                     });
                 }
                 // 跟使用者拿所在位置的權限
@@ -171,7 +210,7 @@
             var country11 = []
             var country22 = []
             var country23 = []
-            
+
             var country = []
 
             window.onload = function () {
@@ -226,14 +265,12 @@
                                 url: "mask.png",
                                 scaledSize: new google.maps.Size(40, 40)
                             }
-                        } 
-                        else if(havenot<100 && havenot>0){
+                        } else if (havenot < 100 && havenot > 0) {
                             markers.icon = {
                                 url: "lmask.png",
                                 scaledSize: new google.maps.Size(40, 40)
                             }
-                        }
-                        else {
+                        } else {
                             markers.icon = {
                                 url: "notmask.png",
                                 scaledSize: new google.maps.Size(40, 40)
@@ -298,7 +335,7 @@
 
             // console.log(total)
             function _thsort(btn) {
-            var country22 = []
+                var country22 = []
 
                 var btn = btn.id;
                 var btncountry = []
@@ -324,7 +361,7 @@
                         country22.push(item)
                     }
                 })
-                country23=country22
+                country23 = country22
                 console.log(country22) //地區
                 for (let i = 0; i < country22.length; i++) {
                     if (country22[i].Country == btn) {
