@@ -1,76 +1,107 @@
-<template id="template">
-    <div class="card col-4 col-md-3 p-0 bg-dark text-white">
-        <img src="" class="card-img-top w-100" alt="" data-toggle="modal">
-        <div class="card-body text-center">
-            <h5 class="card-title"></h5>
-            <span class="price d-block mb-2"></span>
-        </div>
-    </div>
-    <div class="modal fade text-dark" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header">
-                    <h5 class="modal-title" ></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="modal-txt"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-<script type="module">
-    let row = document.querySelector('.row');
-    var img = document.createElement('img');
-    function CreateCard(Array) {
-        let template = document.querySelector('#template');
-        Array.forEach((item) => {
-            let cloneContent = template.content.cloneNode(true);
-            let img = cloneContent.querySelector('.card-img-top');
-            let title = cloneContent.querySelector('.card-title');
-            let h5 = cloneContent.querySelector('.modal-title');
-            let p = cloneContent.querySelector('.modal-txt')
-            let span = cloneContent.querySelector('.price')
-            img.setAttribute('src', `${item.Img}`);
-            title.innerText = item.Name;
-            span.innerText = `${item.Price}權力點`;
-            h5.innerHTML=item.Name;
-            p.innerText = item.Information;
-            let model_fade = cloneContent.querySelector('.modal');
-            model_fade.setAttribute('id', `${item.ID}`);
-            img.setAttribute('data-target', `#${item.ID}`)
-            h5.setAttribute('id', `${item.ID}`);
-            row.appendChild(cloneContent);
-            
-        })
-    }
-    let data = [];
-        let rowdata = '';
-        window.onload = function () {
-            let xhr = new XMLHttpRequest;
-            xhr.onload = function () {
+<!doctype html>
+<html lang="en">
 
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    rowdata = JSON.parse(this.responseText);
-                    rowdata.feed.entry.forEach(item => {
-                        // item.gsx$name.$t
-                        data.push({
-                            Name: item.gsx$name.$t,
-                            Img: item.gsx$img.$t,
-                            Price: item.gsx$price.$t,
-                            Information: item.gsx$information.$t,
-                            ID: item.gsx$id.$t
-                        });
-                    });
-                    CreateCard(data);
-                }
-                debugger
-            }
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            xhr.open('GET', 'https://spreadsheets.google.com/feeds/list/1y_WYotDw9COdRAHe-P15VCkQuZJFZx_iCdAQpAWJCCM/od6/public/values?alt=json');
-            xhr.send();
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        #pic {
+            margin: auto;
+            width: 480px;
+            height: 480px;
+            border: 1px solid brown;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+            top: 100px;
         }
+
+        .ppic {
+
+            margin: 0;
+            padding: 0;
+            width: 120px;
+            height: 120px;
+            /* background-color: #f0f; */
+            /* border: 2px splid black; */
+            border-top: solid 1px black;
+            border-left: solid 1px black;
+            border-right: solid 1px black;
+            border-bottom: solid 1px black;
+            float: left;
+            overflow: hidden;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="pic" class="col-12">
+        <!-- <img src="https://picsum.photos/4800/4800/?random=1" alt="圖片說明"class=""> -->
+    </div>
+    <script>
+        a();
+
+        function a() {
+            var posConv = {};
+            var pic = document.getElementById("pic");
+            for (let i = 0; i < 16; i++) {
+                var ppic = document.createElement("div");
+                ppic.setAttribute("id", `pic${i}`)
+                ppic.setAttribute("class", "ppic col-3")
+                pic.appendChild(ppic)
+                var image = document.createElement("img");
+                image.setAttribute("src", "https://picsum.photos/480/480/?random=1")
+                ppic.appendChild(image)
+
+                var row = parseInt(i / 4);
+                var col = i % 4;
+                image.setAttribute("style", `margin-left:${col* -120 + 1}px;margin-top: ${row* -120 + 1}px; `)
+                posConv[i] = {
+                    row: row,
+                    col: col
+                };
+                // posConv.push({row:row, col:col})
+            }
+            var pic0 = document.getElementById("pic0");
+            pic0.getElementsByTagName("img")[0].remove()
+            console.log(posConv)
+
+            function getNearPos(i) {
+                var pool = [];
+                var row = posConv[i].row,
+                    col = posConv[i].col;
+                //toCheck用來放入待比對的對象
+                if (row > 0) //上
+                    pool.push((row - 1) * 4 + col);
+                if (row < 4) //下
+                    pool.push((row + 1) * 4 + col);
+                if (col > 0) //左
+                    pool.push(i - 1);
+                if (col < 4) //右
+                    pool.push(i + 1);
+                return pool;
+            }
+            
+        }
+        
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
