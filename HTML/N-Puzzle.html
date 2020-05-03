@@ -9,32 +9,178 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
     <title>Hello, world!</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 50px;
+            font-size: 40px;
+            color: red;
+            margin: auto;
+        }
+
+        #pic {
+            margin: auto;
+            width: 480px;
+            height: 480px;
+
+            /* padding: 0; */
+            box-sizing: border-box;
+            margin-right: 0px;
+        }
+
+        .container {
+            position: relative;
+            top: 100px;
+        }
+
+        #answer {
+            border: 1px black solid;
+        }
+
+        .restart {
+            margin: auto;
+            text-align: center;
+            position: relative;
+            top: 50px;
+        }
+
+        .ppic {
+            margin: 0;
+            padding: 0;
+            width: 120px;
+            height: 120px;
+            border-top: solid 1px black;
+            border-left: solid 1px black;
+            border-right: solid 1px black;
+            border-bottom: solid 1px black;
+            float: left;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
-    <button onclick="click">開始</button>
-    <button></button>
-    
-    <img src="https://picsum.photos/300/300/?random=1" alt="圖片說明" id="image">
-    <canvas id="imageC" width="300" height="300" ></canvas>
-    <script>
-        var img = document.getElementById('image');
-        var canvas = document.getElementById('imageC');
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(img,0,0,300,300);
-        var numberx=numbery=3
-        function click(){
-            var canvas = document.getElementById('imageC');
-            var canvasH=canvas.clientHeight;
-            var canvasW=canvas.clientWidth;
-        }
+    <div id="result"></div>
 
-       
+    <div class="restart">
+        <button id="restart" class="btn btn-dark ">開始</button>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div id="answer">
+                <img src="https://picsum.photos/480/480/?random=1" alt="圖片說明" class="">
+            </div>
+            <!-- <button id="restart" class="btn btn-dark ">開始</button> -->
+
+            <div id="pic">
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        a();
+
+        function a() {
+            document.getElementById("restart").addEventListener("click", random_pos);
+            var pic = document.getElementById("pic");
+            for (var i = 0; i < 16; i++) {
+                var ppic = document.createElement("div");
+                ppic.setAttribute("id", `pic${i}`)
+                // ppic.setAttribute("onclick", "ppic()")
+                ppic.addEventListener("click", pic_move);
+                ppic.setAttribute("class", `ppic ${i} col-3`)
+                pic.appendChild(ppic)
+                var image = document.createElement("img");
+                image.setAttribute("src", "https://picsum.photos/480/480/?random=1")
+                ppic.appendChild(image)
+                var row = parseInt(i / 4);
+                var col = i % 4;
+                image.setAttribute("style", `margin-left:${col* -120}px;margin-top: ${row* -120}px; `)
+                // posConv.push({row:row, col:col})
+            }
+            var pic0 = document.getElementById("pic0");
+            // pic0.getElementsByTagName("img")[0].remove()
+            var img0 = pic0.getElementsByTagName("img")[0]
+            img0.setAttribute("src", "")
+
+            function pic_move() {
+                var blank_pic_offset = document.getElementById("pic0");
+
+                var blank_pic_offset_top = blank_pic_offset.offsetTop;
+                // console.log(blank_pic_offset_top)
+                var blank_pic_offset_left = blank_pic_offset.offsetLeft;
+                // console.log(blank_pic_offset_left)
+
+                var _offset_top = this.offsetTop;
+                // console.log(_offset_top)
+
+                var _offset_left = this.offsetLeft;
+                // console.log(_offset_left)
+
+                if ((Math.abs(blank_pic_offset_top - _offset_top) == 120 && blank_pic_offset_left == _offset_left) || ((
+                        Math.abs(blank_pic_offset_left - _offset_left) == 120 || Math.abs(blank_pic_offset_left -
+                            _offset_left) == 119) && blank_pic_offset_top == _offset_top)) {
+                    var str = blank_pic_offset.innerHTML;
+                    blank_pic_offset.innerHTML = this.innerHTML;
+                    this.innerHTML = str;
+                    blank_pic_offset.setAttribute('id', this.id)
+                    this.id = 'pic0'
+                    check();
+                }
+            }
+
+            function random_pos() {
+                //alert(1111)
+                var part = document.getElementById("pic").childNodes;
+                console.log(part)
+                console.log(part[1])
+                // $("#pic1").after($("#pic3"))
+                random_arr = [];
+                for (var j = 1; j <= 15; j++) {
+                    random_arr[j - 1] = j;
+                }
+                console.log(random_arr)
+
+                function cmp() {
+                    return 0.5 - Math.random();
+                }
+                random_arr.sort(cmp)
+                random_end = []
+                $("#pic0").after($(`#pic${random_arr[0]}`))
+                for (var i = 1; i < 15; i++) {
+                    $(`#pic${random_arr[i-1]}`).after($(`#pic${random_arr[i]}`))
+                }
+                console.log(random_arr)
+            }
+
+            function check() {
+                var item = document.getElementById("pic").childNodes;
+                console.log(item)
+                console.log(item[1])
+
+
+                for (var i = 0; i <= 15; i++) {
+                    // console.log(item[1].id)
+                    console.log(item[i].id)
+
+                    if (item[i + 1].id != "pic" + i) {
+                        document.getElementById("result").innerText = "請繼續...";
+                        return;
+                    }
+                }
+                document.getElementById("result").innerText = "你贏了!";
+            }
+
+        }
     </script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
