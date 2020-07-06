@@ -1,0 +1,22 @@
+img{
+    height: 285px;
+    object-fit: cover;
+}
+.card-body{
+    background-color: rgb(6,28,37);
+    height: 55px;
+    line-height: 55px;
+}
+.card-body:hover{
+    cursor: pointer;
+}
+.card-body h5{
+    color: #fff;
+    font-size: 20px;
+    font-style: italic;
+    margin: auto;
+    font-weight: bold ;
+}
+h1{
+    font-size: 70px;
+    text-align: center;}
